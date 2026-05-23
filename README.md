@@ -30,6 +30,9 @@
    ```
 2. Open `http://localhost:8080`
 3. Go to Settings → enter your GitHub token and repository
+
+> **Token permissions:** create a [fine-grained personal access token](https://github.com/settings/tokens) with **Read and write** access to **Contents** — this is required for syncing notes, images, and deletions with your repository.
+
 4. Click "Sync with Repo" to start syncing
 
 ## Configuration
