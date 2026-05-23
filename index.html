@@ -110,19 +110,6 @@
                   Preview
                 </button>
               </div>
-              <button class="btn-icon" id="imageBtn" aria-label="Insert image">
-                <i data-lucide="image" width="18" height="18"></i>
-              </button>
-              <button class="btn-icon" id="iconBtn" aria-label="Insert icon">
-                <i data-lucide="smile" width="18" height="18"></i>
-              </button>
-              <div class="icon-picker hidden" id="iconPicker">
-                <div class="icon-picker-search">
-                  <i data-lucide="search" width="14" height="14"></i>
-                  <input type="text" id="iconSearchInput" class="icon-search-input" placeholder="Search icons...">
-                </div>
-                <div class="icon-picker-grid" id="iconPickerGrid"></div>
-              </div>
               <button class="btn-icon" id="pinBtn" aria-label="Pin note">
                 <i data-lucide="pin" width="18" height="18"></i>
               </button>
@@ -151,6 +138,20 @@
             <button class="btn-fmt" data-fmt="link" aria-label="Insert link">
               <i data-lucide="link" width="14" height="14"></i>
             </button>
+            <span class="fmt-sep"></span>
+            <button class="btn-fmt" id="imageBtn" aria-label="Insert image">
+              <i data-lucide="image" width="14" height="14"></i>
+            </button>
+            <button class="btn-fmt" id="iconBtn" aria-label="Insert icon">
+              <i data-lucide="smile" width="14" height="14"></i>
+            </button>
+            <div class="icon-picker hidden" id="iconPicker">
+              <div class="icon-picker-search">
+                <i data-lucide="search" width="14" height="14"></i>
+                <input type="text" id="iconSearchInput" class="icon-search-input" placeholder="Search icons...">
+              </div>
+              <div class="icon-picker-grid" id="iconPickerGrid"></div>
+            </div>
           </div>
           <div class="editor-body">
             <textarea id="noteContent" class="note-content-input" placeholder="Write markdown..."></textarea>
