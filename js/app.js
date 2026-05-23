@@ -155,6 +155,7 @@ window.App = window.App || {};
         else if (fmt === 'strikethrough') App.wrapSelection('~~', '~~', 'strikethrough');
         else if (fmt === 'link') App.insertLink();
         else if (fmt === 'code') App.insertCode();
+        else if (fmt === 'table') App.insertTable();
       });
     });
 

@@ -134,4 +134,14 @@ window.App = window.App || {};
     ta.focus();
     App.scheduleSave();
   };
+
+  App.insertTable = function () {
+    var ta = dom.noteContent;
+    var start = ta.selectionStart;
+    App.insertMarkdownAtCursor('| Column 1 | Column 2 |\n|----------|----------|\n|          |          |\n');
+    ta.selectionStart = start + 2;
+    ta.selectionEnd = start + 10;
+    ta.focus();
+    App.scheduleSave();
+  };
 })();
