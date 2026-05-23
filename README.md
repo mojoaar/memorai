@@ -2,8 +2,9 @@
 
 **Your second brain, in markdown.**
 
-A client-side notes app with GitHub Repo sync, markdown editing,
-and 12 built-in themes. Runs entirely in the browser — no server needed.
+## Screenshot
+
+![memorai](assets/memorai.png)
 
 ## Features
 
