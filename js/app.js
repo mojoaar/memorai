@@ -158,6 +158,7 @@ window.App = window.App || {};
         else if (fmt === 'ul') App.insertList('-');
         else if (fmt === 'ol') App.insertList('1.');
         else if (fmt === 'task') App.insertList('- [ ]');
+        else if (fmt === 'hr') App.insertMarkdownAtCursor('\n---\n');
       });
     });
 
