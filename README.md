@@ -1,6 +1,6 @@
 # memorai
 
-**Your second brain, in markdown.**
+Take notes in markdown, sync them to GitHub, and access them anywhere. A lightweight, browser-only alternative to Obsidian and Notion.
 
 ## Screenshot
 
