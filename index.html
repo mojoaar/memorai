@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="catppuccin-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e1e2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="memorai">
+  <meta name="description" content="memorai — Your second brain, in markdown. A client-side notes app with GitHub Repo sync.">
+  <title>memorai — Your second brain, in markdown</title>
+  <link rel="canonical" id="canonicalUrl" href="">
+  <meta property="og:type" content="website">
+  <meta property="og:title" id="ogTitle" content="memorai — Your second brain, in markdown">
+  <meta property="og:description" id="ogDesc" content="A client-side notes app with GitHub Repo sync. Your second brain, in markdown.">
+  <meta property="og:image" id="ogImage" content="og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" id="ogUrl" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" id="twTitle" content="memorai — Your second brain, in markdown">
+  <meta name="twitter:description" id="twDesc" content="A client-side notes app with GitHub Repo sync. Your second brain, in markdown.">
+  <meta name="twitter:image" id="twImage" content="og-image.png">
+  <script type="application/ld+json" id="structuredData">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "memorai",
+    "description": "Your second brain, in markdown. A client-side notes app with GitHub Repo sync.",
+    "url": "",
+    "applicationCategory": "NoteTakingApplication",
+    "operatingSystem": "Any"
+  }
+  </script>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMElEQVR4nGOQk9P7TwlmGEYGnF72HY5JEcNqAEySkBheA4jBw9kAsmJh4BPS0DUAAHwhCn1fPcgbAAAAAElFTkSuQmCC">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <button class="btn-icon sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <i data-lucide="menu" width="24" height="24"></i>
+      </button>
+      <h1 class="app-title">memorai</h1>
+      <div class="header-actions">
+        <button class="btn-icon" id="themeToggle" aria-label="Toggle theme">
+          <i data-lucide="moon" id="themeToggleIcon" width="20" height="20"></i>
+        </button>
+        <button class="btn-icon" id="settingsToggle" aria-label="Settings">
+          <i data-lucide="settings" width="20" height="20"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <button class="btn-primary btn-new-note" id="newNoteBtn">
+            <i data-lucide="plus" width="18" height="18"></i>
+            New Note
+          </button>
+        </div>
+        <div class="search-box">
+          <i data-lucide="search" width="16" height="16"></i>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search title, content, tags...">
+        </div>
+        <div class="notes-list" id="notesList">
+          <div class="empty-state">
+            <i data-lucide="file-text" width="48" height="48"></i>
+            <p>No notes yet</p>
+            <span>Create one to get started</span>
+          </div>
+        </div>
+        <div class="sidebar-footer">
+          <button class="btn-text" id="syncBtn">
+            <i data-lucide="refresh-cw" width="16" height="16"></i>
+            <span id="syncLabel">Sync with Repo</span>
+          </button>
+          <span class="note-count" id="noteCount">0 notes</span>
+        </div>
+      </aside>
+
+      <main class="editor-area" id="editorArea">
+        <div class="editor-empty" id="editorEmpty">
+          <div class="empty-illustration">
+            <i data-lucide="pen" width="64" height="64"></i>
+          </div>
+          <h2>Select a note or create a new one</h2>
+        </div>
+        <div class="editor-content hidden" id="editorContent">
+          <div class="editor-toolbar">
+            <button class="btn-text" id="backBtn">
+              <i data-lucide="arrow-left" width="18" height="18"></i>
+            </button>
+            <div class="editor-actions">
+              <div class="view-toggle" id="viewToggle">
+                <button class="btn-text view-btn active" id="editBtn" aria-label="Edit mode">
+                  <i data-lucide="pencil" width="16" height="16"></i>
+                  Edit
+                </button>
+                <button class="btn-text view-btn" id="previewBtn" aria-label="Preview mode">
+                  <i data-lucide="eye" width="16" height="16"></i>
+                  Preview
+                </button>
+              </div>
+              <button class="btn-icon" id="imageBtn" aria-label="Insert image">
+                <i data-lucide="image" width="18" height="18"></i>
+              </button>
+              <button class="btn-icon" id="iconBtn" aria-label="Insert icon">
+                <i data-lucide="smile" width="18" height="18"></i>
+              </button>
+              <div class="icon-picker hidden" id="iconPicker">
+                <div class="icon-picker-search">
+                  <i data-lucide="search" width="14" height="14"></i>
+                  <input type="text" id="iconSearchInput" class="icon-search-input" placeholder="Search icons...">
+                </div>
+                <div class="icon-picker-grid" id="iconPickerGrid"></div>
+              </div>
+              <button class="btn-icon" id="pinBtn" aria-label="Pin note">
+                <i data-lucide="pin" width="18" height="18"></i>
+              </button>
+              <button class="btn-icon" id="shareBtn" aria-label="Copy link">
+                <i data-lucide="link" width="18" height="18"></i>
+              </button>
+              <button class="btn-icon" id="exportMdBtn" aria-label="Export as Markdown">
+                <i data-lucide="download" width="18" height="18"></i>
+              </button>
+              <button class="btn-icon btn-danger" id="deleteBtn" aria-label="Delete note">
+                <i data-lucide="trash-2" width="18" height="18"></i>
+              </button>
+            </div>
+          </div>
+          <input type="text" id="noteTitle" class="note-title-input" placeholder="Note title...">
+          <div class="formatting-toolbar" id="formattingToolbar">
+            <button class="btn-fmt" data-fmt="h1" aria-label="Heading 1"><strong>H1</strong></button>
+            <button class="btn-fmt" data-fmt="h2" aria-label="Heading 2"><strong>H2</strong></button>
+            <button class="btn-fmt" data-fmt="h3" aria-label="Heading 3"><strong>H3</strong></button>
+            <span class="fmt-sep"></span>
+            <button class="btn-fmt" data-fmt="bold" aria-label="Bold"><strong>B</strong></button>
+            <button class="btn-fmt" data-fmt="italic" aria-label="Italic"><em>I</em></button>
+            <button class="btn-fmt" data-fmt="underline" aria-label="Underline"><u>U</u></button>
+            <button class="btn-fmt" data-fmt="strikethrough" aria-label="Strikethrough"><s>S</s></button>
+          </div>
+          <div class="editor-body">
+            <textarea id="noteContent" class="note-content-input" placeholder="Write markdown..."></textarea>
+            <div class="note-preview hidden" id="notePreview"></div>
+          </div>
+          <div class="tags-area" id="tagsArea">
+            <div class="tags-input-wrap">
+              <i data-lucide="tag" width="14" height="14"></i>
+              <div class="tags-input-autocomplete">
+                <input type="text" id="noteTags" class="tags-input" placeholder="Add tags (Enter or comma to confirm)" autocomplete="off">
+                <div class="tag-suggestions hidden" id="tagSuggestions"></div>
+              </div>
+            </div>
+            <div class="tags-list" id="tagsList"></div>
+          </div>
+          <div class="editor-footer">
+            <span class="last-modified" id="lastModified"></span>
+          </div>
+          <input type="file" id="imageFile" accept="image/*" class="hidden" multiple>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-overlay hidden" id="settingsModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Settings</h2>
+          <button class="btn-icon modal-close" id="settingsClose">
+            <i data-lucide="x" width="20" height="20"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-group">
+            <label class="setting-label" for="themeSelect">Theme</label>
+            <select id="themeSelect" class="setting-select">
+              <option value="catppuccin-dark">Catppuccin Dark</option>
+              <option value="catppuccin-light">Catppuccin Light</option>
+              <option value="dracula-dark">Dracula Dark</option>
+              <option value="dracula-light">Dracula Light</option>
+              <option value="github-dark">GitHub Dark</option>
+              <option value="github-light">GitHub Light</option>
+              <option value="nord-dark">Nord Dark</option>
+              <option value="nord-light">Nord Light</option>
+              <option value="one-dark">One Dark</option>
+              <option value="one-light">One Light</option>
+              <option value="tokyo-night-dark">Tokyo Night Dark</option>
+              <option value="tokyo-night-light">Tokyo Night Light</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label class="setting-label" for="timeFormatSelect">Time Format</label>
+            <select id="timeFormatSelect" class="setting-select">
+              <option value="12h">12-hour (2:30 PM)</option>
+              <option value="24h">24-hour (14:30)</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label class="setting-label" for="noteDisplaySelect">Note Display</label>
+            <select id="noteDisplaySelect" class="setting-select">
+              <option value="full">Full (title, preview, tags, date)</option>
+              <option value="compact">Compact (title, tags)</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label class="setting-label" for="sortBySelect">Sort Notes By</label>
+            <select id="sortBySelect" class="setting-select">
+              <option value="modified">Date Modified</option>
+              <option value="created">Date Created</option>
+              <option value="title">Title (A–Z)</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label class="setting-label" for="githubToken">GitHub Personal Access Token</label>
+            <input type="password" id="githubToken" class="setting-input" placeholder="ghp_...">
+            <p class="setting-hint">Create a token with <strong>repo</strong> scope at <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">github.com/settings/tokens</a></p>
+            <span class="server-field-hint hidden" id="githubTokenHint">Managed by server config</span>
+          </div>
+          <div class="setting-group">
+            <label class="setting-label" for="repoInput">GitHub Repository</label>
+            <input type="text" id="repoInput" class="setting-input" placeholder="owner/repo-name">
+            <p class="setting-hint">Example: <strong>mojoaar/memorai-data</strong></p>
+            <span class="server-field-hint hidden" id="repoHint">Managed by server config</span>
+          </div>
+          <div class="setting-group">
+            <label class="setting-label" for="branchInput">Branch</label>
+            <input type="text" id="branchInput" class="setting-input" placeholder="main">
+            <span class="server-field-hint hidden" id="branchHint">Managed by server config</span>
+          </div>
+          <div class="setting-group">
+            <label class="setting-label">Data</label>
+            <div class="data-actions">
+              <button class="btn-secondary" id="exportBtn">Export notes</button>
+              <button class="btn-secondary" id="importBtn">Import notes</button>
+              <input type="file" id="importFile" accept=".json" class="hidden">
+            </div>
+          </div>
+          <div class="settings-footer">
+            <p class="settings-credit">memorai by <strong>Morten Johansen</strong></p>
+            <div class="settings-links">
+              <a href="https://johansen.foo" target="_blank" rel="noopener">johansen.foo</a>
+              <span class="settings-sep">·</span>
+              <a href="https://github.com/mojoaar/memorai" target="_blank" rel="noopener">github.com/mojoaar/memorai</a>
+            </div>
+            <span class="settings-version" id="settingsVersion"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/sync.js"></script>
+  <script src="js/image.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

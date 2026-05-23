@@ -1,0 +1,17 @@
+{
+  "_comments": [
+    "Rename this file to config.json and fill in your values.",
+    "githubToken: Create a fine-grained token at https://github.com/settings/tokens with 'repo' scope",
+    "repo: Repository in owner/name format, e.g. 'mojoaar/memorai-data'",
+    "branch: Branch name, usually 'main'",
+    "url: Canonical URL of your deployment, e.g. 'https://notes.example.com'",
+    "title: Browser tab title, e.g. 'My Notes' (leave empty for default)",
+    "description: Meta description for SEO/sharing, e.g. 'Personal knowledge base'"
+  ],
+  "githubToken": "",
+  "repo": "",
+  "branch": "main",
+  "url": "",
+  "title": "",
+  "description": ""
+}
