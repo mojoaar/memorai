@@ -143,6 +143,7 @@ window.App = window.App || {};
         else if (fmt === 'italic') App.wrapSelection('*', '*', 'italic');
         else if (fmt === 'underline') App.wrapSelection('__', '__', 'underline');
         else if (fmt === 'strikethrough') App.wrapSelection('~~', '~~', 'strikethrough');
+        else if (fmt === 'link') App.insertLink();
       });
     });
 

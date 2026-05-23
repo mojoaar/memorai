@@ -94,4 +94,26 @@ window.App = window.App || {};
     ta.focus();
     App.scheduleSave();
   };
+
+  App.insertLink = function () {
+    var ta = dom.noteContent;
+    var start = ta.selectionStart;
+    var end = ta.selectionEnd;
+    var hasSelection = start !== end;
+    var selected = hasSelection ? ta.value.substring(start, end) : '';
+    var url = prompt('Enter URL:', 'https://');
+    if (!url) return;
+    var text = hasSelection ? selected : 'link text';
+    if (hasSelection) {
+      ta.value = ta.value.substring(0, start) + '[' + text + '](' + url + ')' + ta.value.substring(end);
+      ta.selectionStart = start + text.length + 3;
+      ta.selectionEnd = start + text.length + 3 + url.length;
+    } else {
+      App.insertMarkdownAtCursor('[' + text + '](' + url + ')');
+      ta.selectionStart = start + 1;
+      ta.selectionEnd = start + 1 + text.length;
+    }
+    ta.focus();
+    App.scheduleSave();
+  };
 })();
