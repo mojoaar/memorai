@@ -72,6 +72,16 @@ MIT — see [LICENSE](LICENSE)
 
 ## Changelog
 
+### 0.1.2
+
+- Sync now deletes remote notes removed locally (fix: orphaned `.md` files no longer left behind)
+- Danger Zone in Settings — wipe all remote and local data with DELETE confirmation
+- Hyperlink insertion button in formatting toolbar (`[text](url)`)
+- Image and icon picker buttons moved from top toolbar to formatting toolbar
+- Hide sync button and danger zone when no repository configured
+- Favicon fixed for Safari/WebKit with proper link pattern (`favicon.ico` + PNGs)
+- AGENTS.md added for AI-assisted development
+
 ### 0.1.1
 
 - Removed Gist sync, replaced with GitHub Repo sync via Contents API
