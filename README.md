@@ -18,7 +18,7 @@ Take notes in markdown, sync them to GitHub, and access them anywhere. A lightwe
 - **URL hash routing** — share notes via link
 - **Export** — individual notes as `.md` or full backup as JSON
 - **Server config** — deploy with `config.json` for shared settings
-- **147 Lucide icons** — embeddable inline via `:icon-name:` syntax
+- **228 Lucide icons** — embeddable inline via `:icon-name:` syntax
 - **SEO** — Open Graph, Twitter Cards, JSON-LD, canonical URL
 
 ## Quick Start
@@ -116,7 +116,7 @@ MIT — see [LICENSE](LICENSE)
 - Server config via `config.json` with field locking and title/description override
 - SEO: Open Graph, Twitter Cards, JSON-LD, canonical URL, `robots.txt`
 - 3 new themes: Tokyo Night, Dracula, One Dark (12 total)
-- Icon picker with 147 Lucide icons
+- Icon picker with 228 Lucide icons
 - Browser favicon as inline data URI for WebKit compatibility
 - Service worker with cache versioning, API filtering, and activate cleanup
 - Bug fixes: XSS sanitization, localStorage error handling, auto-save sidebar update
@@ -132,7 +132,7 @@ MIT — see [LICENSE](LICENSE)
 - URL hash routing for sharing and bookmarking notes
 - Export single notes as `.md` or full backup as JSON
 - Server config via `config.json` with field locking
-- 147 Lucide icons via inline embedded SVGs
+- 228 Lucide icons via inline embedded SVGs
 - Icon picker with search
 - Service worker with cache management and API filtering
 - SEO: Open Graph, Twitter Cards, JSON-LD, canonical URL
