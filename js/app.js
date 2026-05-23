@@ -29,6 +29,7 @@ window.App = window.App || {};
     App.configureMarked();
     App.refreshIcons();
     App.updateThemeIcon();
+    App.updateRepoDependentUI();
     App.routeFromHash();
   };
 
@@ -166,13 +167,14 @@ window.App = window.App || {};
       dom.branchInput.value = state.settings.branch || 'main';
       if (dom.settingsVersion) dom.settingsVersion.textContent = 'v' + App.VERSION;
       App.disableServerFields();
+      App.updateRepoDependentUI();
       App.refreshIcons(dom.settingsModal);
     });
 
-    dom.settingsClose.addEventListener('click', function () { dom.settingsModal.classList.add('hidden'); App.hideWipeConfirm(); App.saveSettings(); });
+    dom.settingsClose.addEventListener('click', function () { dom.settingsModal.classList.add('hidden'); App.hideWipeConfirm(); App.saveSettings(); App.updateRepoDependentUI(); });
 
     dom.settingsModal.addEventListener('click', function (e) {
-      if (e.target === dom.settingsModal) { dom.settingsModal.classList.add('hidden'); App.hideWipeConfirm(); App.saveSettings(); }
+      if (e.target === dom.settingsModal) { dom.settingsModal.classList.add('hidden'); App.hideWipeConfirm(); App.saveSettings(); App.updateRepoDependentUI(); }
     });
 
     dom.themeSelect.addEventListener('change', function () { App.setTheme(dom.themeSelect.value); });
@@ -187,8 +189,8 @@ window.App = window.App || {};
     dom.noteDisplaySelect.addEventListener('change', function () { state.settings.noteDisplay = dom.noteDisplaySelect.value; App.saveSettings(); App.renderNotesList(); });
     dom.sortBySelect.addEventListener('change', function () { state.settings.sortBy = dom.sortBySelect.value; App.saveSettings(); App.renderNotesList(); });
 
-    dom.githubToken.addEventListener('change', App.saveSettings);
-    dom.repoInput.addEventListener('change', App.saveSettings);
+    dom.githubToken.addEventListener('change', function () { App.saveSettings(); App.updateRepoDependentUI(); });
+    dom.repoInput.addEventListener('change', function () { App.saveSettings(); App.updateRepoDependentUI(); });
     dom.branchInput.addEventListener('change', App.saveSettings);
 
     dom.syncBtn.addEventListener('click', App.handleSync);
