@@ -67,6 +67,7 @@ window.App = window.App || {};
     sortBySelect: $('#sortBySelect'),
     settingsVersion: $('#settingsVersion'),
     wipeBtn: $('#wipeBtn'),
+    wipeConfirm: $('#wipeConfirm'),
     wipeInput: $('#wipeInput'),
     wipeConfirmBtn: $('#wipeConfirmBtn'),
   };
