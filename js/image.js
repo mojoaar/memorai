@@ -138,9 +138,9 @@ window.App = window.App || {};
   App.insertTable = function () {
     var ta = dom.noteContent;
     var start = ta.selectionStart;
-    App.insertMarkdownAtCursor('| Column 1 | Column 2 |\n|----------|----------|\n|          |          |');
-    ta.selectionStart = start + 2;
-    ta.selectionEnd = start + 10;
+    App.insertMarkdownAtCursor('\n| Column 1 | Column 2 |\n|----------|----------|\n|          |          |\n');
+    ta.selectionStart = start + 3;
+    ta.selectionEnd = start + 11;
     ta.focus();
     App.scheduleSave();
   };
