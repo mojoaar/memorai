@@ -73,6 +73,18 @@ MIT — see [LICENSE](LICENSE)
 
 ## Changelog
 
+### 0.1.3
+
+- Code snippet insertion with syntax highlighting via highlight.js
+- Table insertion with GFM rendering and DOMPurify XSS protection
+- Ordered list, unordered list, and task list insertion in formatting toolbar
+- Horizontal rule, heading anchor (`{#id}`), and footnote (`[^1]`) insertion
+- Tag chips redesigned with accent-filled background for better visibility
+- Link, image, icon, code, and table buttons grouped together in formatting toolbar
+- Toolbar tooltips on hover via `title` attributes
+- Favicon 16px and 32px regenerated from SVG source
+- 3 new Lucide icons added to embedded set (151 total)
+
 ### 0.1.2
 
 - Sync now deletes remote notes removed locally (fix: orphaned `.md` files no longer left behind)
