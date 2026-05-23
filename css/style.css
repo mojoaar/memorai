@@ -353,7 +353,7 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
   margin-top: 0;
 }
 
-.btn-danger-outline { border-color: var(--danger); color: var(--danger); }
+.btn-danger-outline { border-color: var(--danger); color: var(--danger); margin-top: 6px; }
 .btn-danger-outline:hover { background: var(--danger); color: var(--bg); }
 
 .danger-confirm {
