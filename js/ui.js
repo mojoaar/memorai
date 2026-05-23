@@ -125,6 +125,9 @@ window.App = window.App || {};
     var html = App.renderMarkdown(dom.noteContent.value);
     html = App.processIconShortcodes(html);
     html = App.rewriteImageURLs(html);
+    if (typeof DOMPurify !== 'undefined') {
+      html = DOMPurify.sanitize(html);
+    }
     dom.notePreview.innerHTML = html;
     dom.noteContent.classList.add('hidden');
     dom.notePreview.classList.remove('hidden');
