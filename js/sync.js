@@ -201,6 +201,58 @@ window.App = window.App || {};
     }
   };
 
+  App.wipeRemoteRepo = async function () {
+    var s = state.settings;
+    if (!s.repo || !s.githubToken) {
+      App.toast('Set GitHub token and repository first', 'error');
+      return;
+    }
+    dom.syncLabel.textContent = 'Wiping...';
+    dom.syncBtn.disabled = true;
+    try {
+      var notesList = await repoAPI('/notes?ref=' + s.branch, 'GET');
+      if (Array.isArray(notesList)) {
+        for (var i = 0; i < notesList.length; i++) {
+          var f = notesList[i];
+          if (f.type !== 'file') continue;
+          try {
+            await repoAPI('/notes/' + f.name, 'DELETE', { message: 'Wipe all data', sha: f.sha, branch: s.branch });
+          } catch (e) {
+            console.warn('Failed to delete note:', f.name, e);
+          }
+        }
+      }
+      try {
+        var imgList = await repoAPI('/images?ref=' + s.branch, 'GET');
+        if (Array.isArray(imgList)) {
+          for (var j = 0; j < imgList.length; j++) {
+            var fi = imgList[j];
+            if (fi.type !== 'file') continue;
+            try {
+              await repoAPI('/images/' + fi.name, 'DELETE', { message: 'Wipe all data', sha: fi.sha, branch: s.branch });
+            } catch (e) {
+              console.warn('Failed to delete image:', fi.name, e);
+            }
+          }
+        }
+      } catch (e) { /* images/ may not exist */ }
+      state.notes = [];
+      state.pendingImages = [];
+      state.activeNoteId = null;
+      state.currentTags = [];
+      App.saveNotes();
+      App.showEmptyEditor();
+      App.renderNotesList();
+      App.updateNoteCount();
+      App.toast('All remote and local data wiped', 'success');
+    } catch (e) {
+      App.toast('Wipe failed: ' + e.message, 'error');
+    } finally {
+      dom.syncLabel.textContent = 'Sync with Repo';
+      dom.syncBtn.disabled = false;
+    }
+  };
+
   App.oneTimeMigration = function () {
     var migrated = false;
     state.notes.forEach(function (note) {

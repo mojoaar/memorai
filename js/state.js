@@ -66,6 +66,9 @@ window.App = window.App || {};
     noteDisplaySelect: $('#noteDisplaySelect'),
     sortBySelect: $('#sortBySelect'),
     settingsVersion: $('#settingsVersion'),
+    wipeBtn: $('#wipeBtn'),
+    wipeInput: $('#wipeInput'),
+    wipeConfirmBtn: $('#wipeConfirmBtn'),
   };
 
   App.state = {

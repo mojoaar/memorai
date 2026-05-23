@@ -168,10 +168,10 @@ window.App = window.App || {};
       App.refreshIcons(dom.settingsModal);
     });
 
-    dom.settingsClose.addEventListener('click', function () { dom.settingsModal.classList.add('hidden'); App.saveSettings(); });
+    dom.settingsClose.addEventListener('click', function () { dom.settingsModal.classList.add('hidden'); App.hideWipeConfirm(); App.saveSettings(); });
 
     dom.settingsModal.addEventListener('click', function (e) {
-      if (e.target === dom.settingsModal) { dom.settingsModal.classList.add('hidden'); App.saveSettings(); }
+      if (e.target === dom.settingsModal) { dom.settingsModal.classList.add('hidden'); App.hideWipeConfirm(); App.saveSettings(); }
     });
 
     dom.themeSelect.addEventListener('change', function () { App.setTheme(dom.themeSelect.value); });
@@ -195,6 +195,17 @@ window.App = window.App || {};
     dom.exportBtn.addEventListener('click', App.exportNotes);
     dom.importBtn.addEventListener('click', function () { dom.importFile.click(); });
     dom.importFile.addEventListener('change', function (e) { if (e.target.files && e.target.files[0]) { App.importNotes(e.target.files[0]); dom.importFile.value = ''; } });
+
+    dom.wipeBtn.addEventListener('click', App.showWipeConfirm);
+
+    dom.wipeInput.addEventListener('input', function () {
+      dom.wipeConfirmBtn.disabled = dom.wipeInput.value !== 'DELETE';
+    });
+
+    dom.wipeConfirmBtn.addEventListener('click', function () {
+      App.hideWipeConfirm();
+      App.wipeRemoteRepo();
+    });
 
     document.addEventListener('keydown', function (e) {
       var mod = e.metaKey || e.ctrlKey;

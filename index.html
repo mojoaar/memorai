@@ -241,6 +241,16 @@
               <input type="file" id="importFile" accept=".json" class="hidden">
             </div>
           </div>
+          <div class="danger-zone">
+            <h3 class="danger-zone-title">Danger Zone</h3>
+            <p class="setting-hint">Permanently delete all notes and images from your GitHub repository and local storage. This cannot be undone.</p>
+            <button class="btn-secondary btn-danger-outline" id="wipeBtn">Delete All Remote Data</button>
+            <div class="danger-confirm hidden" id="wipeConfirm">
+              <p class="setting-hint">Type <strong>DELETE</strong> to confirm:</p>
+              <input type="text" id="wipeInput" class="setting-input" placeholder="DELETE" autocomplete="off">
+              <button class="btn-primary btn-danger-filled" id="wipeConfirmBtn" disabled>I understand, delete everything</button>
+            </div>
+          </div>
           <div class="settings-footer">
             <p class="settings-credit">memorai by <strong>Morten Johansen</strong></p>
             <div class="settings-links">

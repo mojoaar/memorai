@@ -179,6 +179,23 @@ window.App = window.App || {};
     if (state.sidebarBackdrop) { state.sidebarBackdrop.remove(); state.sidebarBackdrop = null; }
   };
 
+  App.showWipeConfirm = function () {
+    if (!dom.wipeBtn || !dom.wipeConfirm) return;
+    dom.wipeBtn.classList.add('hidden');
+    dom.wipeConfirm.classList.remove('hidden');
+    dom.wipeInput.value = '';
+    dom.wipeConfirmBtn.disabled = true;
+    dom.wipeInput.focus();
+  };
+
+  App.hideWipeConfirm = function () {
+    if (!dom.wipeBtn || !dom.wipeConfirm) return;
+    dom.wipeBtn.classList.remove('hidden');
+    dom.wipeConfirm.classList.add('hidden');
+    dom.wipeInput.value = '';
+    dom.wipeConfirmBtn.disabled = true;
+  };
+
   App.disableServerFields = function () {
     if (!state.hasServerConfig) return;
     var fields = [
