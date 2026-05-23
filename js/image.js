@@ -115,4 +115,23 @@ window.App = window.App || {};
     ta.focus();
     App.scheduleSave();
   };
+
+  App.insertCode = function () {
+    var ta = dom.noteContent;
+    var start = ta.selectionStart;
+    var end = ta.selectionEnd;
+    var hasSelection = start !== end;
+    if (hasSelection) {
+      var selected = ta.value.substring(start, end);
+      ta.value = ta.value.substring(0, start) + '```\n' + selected + '\n```' + ta.value.substring(end);
+      ta.selectionStart = start + 4;
+      ta.selectionEnd = start + 4;
+    } else {
+      App.insertMarkdownAtCursor('```js\n// your code here\n```');
+      ta.selectionStart = start + 3;
+      ta.selectionEnd = start + 5;
+    }
+    ta.focus();
+    App.scheduleSave();
+  };
 })();

@@ -7,7 +7,16 @@ window.App = window.App || {};
 
   App.configureMarked = function () {
     if (typeof marked !== 'undefined') {
-      marked.setOptions({ breaks: true, gfm: true, sanitize: true });
+      var opts = { breaks: true, gfm: true, sanitize: true };
+      if (typeof hljs !== 'undefined') {
+        opts.highlight = function (code, lang) {
+          if (lang && hljs.getLanguage(lang)) {
+            return hljs.highlight(code, { language: lang }).value;
+          }
+          return code;
+        };
+      }
+      marked.setOptions(opts);
     }
   };
 
@@ -145,6 +154,7 @@ window.App = window.App || {};
         else if (fmt === 'underline') App.wrapSelection('__', '__', 'underline');
         else if (fmt === 'strikethrough') App.wrapSelection('~~', '~~', 'strikethrough');
         else if (fmt === 'link') App.insertLink();
+        else if (fmt === 'code') App.insertCode();
       });
     });
 

@@ -307,6 +307,19 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
 .note-preview input[type="checkbox"] { margin-right: 6px; }
 .note-preview strong { font-weight: 600; color: var(--text); }
 
+.note-preview pre code.hljs { color: var(--text); }
+.note-preview .hljs-keyword { color: var(--accent); }
+.note-preview .hljs-string { color: var(--success); }
+.note-preview .hljs-comment { color: var(--text-faint); font-style: italic; }
+.note-preview .hljs-number { color: var(--warning); }
+.note-preview .hljs-function { color: var(--info); }
+.note-preview .hljs-title { color: var(--accent); }
+.note-preview .hljs-built_in { color: var(--info); }
+.note-preview .hljs-attr { color: var(--accent); }
+.note-preview .hljs-literal { color: var(--warning); }
+.note-preview .hljs-type { color: var(--accent); }
+.note-preview .hljs-params { color: var(--text); }
+
 /* === Modal === */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 200; padding: 16px; }
 .modal { position: relative; z-index: 1; background: var(--bg); border-radius: var(--radius-lg); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }

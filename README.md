@@ -14,6 +14,7 @@ Take notes in markdown, sync them to GitHub, and access them anywhere. A lightwe
 - **Tags** with autocomplete and inline search
 - **PWA** — installable on desktop and mobile, works offline
 - **Image support** — paste, drag & drop, stored in repo
+- **Syntax highlighting** — code blocks support all major languages via highlight.js
 - **URL hash routing** — share notes via link
 - **Export** — individual notes as `.md` or full backup as JSON
 - **Server config** — deploy with `config.json` for shared settings
