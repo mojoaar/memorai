@@ -263,7 +263,11 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
 .tag-chip .tag-remove:hover { color: var(--danger); background: var(--bg-hover); }
 
 /* === Icon Picker === */
-.icon-picker { position: absolute; top: 100%; right: 0; margin-top: 4px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); z-index: 60; width: 280px; max-height: 320px; display: flex; flex-direction: column; overflow: hidden; }
+.icon-picker {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); z-index: 60; width: 280px; max-height: 320px; display: flex; flex-direction: column; overflow: hidden; }
 .icon-picker-search { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text-muted); }
 .icon-search-input { flex: 1; border: none; background: transparent; color: var(--text); font-family: var(--font-sans); font-size: 0.8rem; outline: none; }
 .icon-search-input::placeholder { color: var(--text-faint); }
