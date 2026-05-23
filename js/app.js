@@ -7,21 +7,16 @@ window.App = window.App || {};
 
   App.configureMarked = function () {
     if (typeof marked === 'undefined') return;
-    try {
-      marked.use({ breaks: true, gfm: true });
-    } catch (e) {
-      marked.setOptions({ breaks: true, gfm: true });
-    }
+    var opts = { breaks: true, gfm: true };
     if (typeof hljs !== 'undefined') {
-      marked.setOptions({
-        highlight: function (code, lang) {
-          if (lang && hljs.getLanguage(lang)) {
-            return hljs.highlight(code, { language: lang }).value;
-          }
-          return code;
+      opts.highlight = function (code, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+          return hljs.highlight(code, { language: lang }).value;
         }
-      });
+        return code;
+      };
     }
+    marked.setOptions(opts);
   };
 
   App.init = function () {
