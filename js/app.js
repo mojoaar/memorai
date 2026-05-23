@@ -159,6 +159,8 @@ window.App = window.App || {};
         else if (fmt === 'ol') App.insertList('1.');
         else if (fmt === 'task') App.insertList('- [ ]');
         else if (fmt === 'hr') App.insertMarkdownAtCursor('\n---\n');
+        else if (fmt === 'anchor') App.insertMarkdownAtCursor('{#id}');
+        else if (fmt === 'footnote') App.insertMarkdownAtCursor('[^1]');
       });
     });
 
