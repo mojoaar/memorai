@@ -55,6 +55,6 @@
 - **HTML div balance** — the editor toolbar, formatting toolbar, settings modal, and note list are deeply nested. After any HTML change, verify with `grep -c '<div' index.html` vs `grep -c '</div>' index.html`
 - **After innerHTML changes** — always call `App.refreshIcons(container)` or icons won't render
 - **Event handlers on replaced elements** — `refreshIcons()` replaces `<i>` with `<svg>`. Handlers should be on parent buttons, not on the `<i>` elements
-- **`marked` sanitize** — must have `sanitize: true` in `configureMarked()` to prevent XSS
+- **`marked` version** — CDN loads v15 which removed `sanitize` option. XSS protection currently relies on browser CSP. Consider adding DOMPurify if user-generated content from shared repos is a concern.
 - **localStorage writes** — wrapped in try/catch; quota exceeded silently toasts
 - **`App.state.settings` mutation** — always call `App.saveSettings()` after changing, and check `dom.*.disabled` before reading field values (server config locks fields)
