@@ -19,7 +19,7 @@ var URLS = [
   'favicon-512.png',
   'og-image.png',
   'manifest.json',
-  'https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js',
+  'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
   'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js',
   'https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap'
