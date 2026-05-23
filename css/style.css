@@ -177,7 +177,7 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
 .note-item-preview { font-size: 0.78rem; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .note-item-date { font-size: 0.7rem; color: var(--text-faint); }
 .note-item-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
-.note-item-tag { font-size: 0.65rem; padding: 1px 6px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 999px; color: var(--accent); font-weight: 500; }
+.note-item-tag { font-size: 0.65rem; padding: 1px 6px; background: var(--accent); color: var(--bg); border-radius: 999px; font-weight: 500; }
 .sidebar-footer { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-top: 1px solid var(--border); gap: 8px; }
 .note-count { font-size: 0.75rem; color: var(--text-faint); white-space: nowrap; }
 
@@ -258,8 +258,8 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
 .tag-suggestion-item { padding: 6px 10px; font-size: 0.78rem; color: var(--text); cursor: pointer; transition: background var(--transition); }
 .tag-suggestion-item:hover, .tag-suggestion-item.active { background: var(--bg-hover); color: var(--accent); }
 .tags-list { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0; }
-.tag-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 999px; font-size: 0.72rem; color: var(--accent); font-weight: 500; }
-.tag-chip .tag-remove { display: flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; border: none; background: transparent; color: var(--text-muted); cursor: pointer; padding: 0; font-size: 0.7rem; line-height: 1; }
+.tag-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; background: var(--accent); border-radius: 999px; font-size: 0.72rem; color: var(--bg); font-weight: 500; }
+.tag-chip .tag-remove { display: flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; border: none; background: transparent; color: rgba(0,0,0,0.3); cursor: pointer; padding: 0; font-size: 0.7rem; line-height: 1; }
 .tag-chip .tag-remove:hover { color: var(--danger); background: var(--bg-hover); }
 
 /* === Icon Picker === */
