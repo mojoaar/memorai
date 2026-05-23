@@ -14,6 +14,7 @@ var URLS = [
   'js/app.js',
   'favicon.svg',
   'favicon-16.png',
+  'favicon-32.png',
   'favicon-192.png',
   'favicon-512.png',
   'og-image.png',
