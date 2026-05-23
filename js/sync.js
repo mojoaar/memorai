@@ -107,6 +107,27 @@ window.App = window.App || {};
           note._sha = result.content.sha;
         }
       }
+      // Delete remote notes that no longer exist locally
+      try {
+        var remoteFiles = await repoAPI('/notes?ref=' + s.branch, 'GET');
+        if (Array.isArray(remoteFiles)) {
+          var localIds = new Set(state.notes.map(function (n) { return n.id; }));
+          for (var j = 0; j < remoteFiles.length; j++) {
+            var rf = remoteFiles[j];
+            if (rf.type !== 'file') continue;
+            var remoteId = rf.name.replace('.md', '');
+            if (!localIds.has(remoteId)) {
+              try {
+                await repoAPI('/notes/' + rf.name, 'DELETE', { message: 'Delete ' + remoteId, sha: rf.sha, branch: s.branch });
+              } catch (e) {
+                console.warn('Failed to delete remote note:', rf.name, e);
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Could not check remote deletions:', e);
+      }
       App.pushAllImages().then(function () {
         App.saveNotes();
         dom.syncLabel.textContent = 'Sync with Repo';
