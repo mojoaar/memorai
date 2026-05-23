@@ -83,6 +83,13 @@ MIT — see [LICENSE](LICENSE)
 
 ## Changelog
 
+### 0.1.4
+
+- Expanded icon set to 228 Lucide icons (up from 161)
+- 20 coding & development icons: git-fork, git-merge, git-PR, bug, braces, server, terminal-square, etc.
+- 49 new icons across emoji, data, weather, commerce, nature categories
+- Credits section added to README
+
 ### 0.1.3
 
 - Code snippet insertion with syntax highlighting via highlight.js
