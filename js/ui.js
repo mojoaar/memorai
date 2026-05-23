@@ -170,6 +170,14 @@ window.App = window.App || {};
   App.openSidebar = function () { dom.sidebar.classList.add('open'); App.showSidebarBackdrop(); };
   App.closeSidebar = function () { dom.sidebar.classList.remove('open'); App.removeSidebarBackdrop(); };
 
+  App.addToolbarTooltips = function () {
+    document.querySelectorAll('.btn-fmt, .btn-icon').forEach(function (btn) {
+      if (btn.getAttribute('aria-label') && !btn.getAttribute('title')) {
+        btn.setAttribute('title', btn.getAttribute('aria-label'));
+      }
+    });
+  };
+
   App.updateRepoDependentUI = function () {
     var hasRepo = !!(state.settings.repo && state.settings.githubToken);
     if (dom.syncBtn) dom.syncBtn.style.display = hasRepo ? '' : 'none';

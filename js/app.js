@@ -36,6 +36,7 @@ window.App = window.App || {};
     App.updateNoteCount();
     App.configureMarked();
     App.refreshIcons();
+    App.addToolbarTooltips();
     App.updateThemeIcon();
     App.updateRepoDependentUI();
     App.routeFromHash();
