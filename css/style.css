@@ -177,7 +177,7 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
 .note-item-preview { font-size: 0.78rem; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .note-item-date { font-size: 0.7rem; color: var(--text-faint); }
 .note-item-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
-.note-item-tag { font-size: 0.65rem; padding: 1px 6px; background: var(--bg-elevated); border-radius: 999px; color: var(--accent); font-weight: 500; }
+.note-item-tag { font-size: 0.65rem; padding: 1px 6px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 999px; color: var(--accent); font-weight: 500; }
 .sidebar-footer { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-top: 1px solid var(--border); gap: 8px; }
 .note-count { font-size: 0.75rem; color: var(--text-faint); white-space: nowrap; }
 
