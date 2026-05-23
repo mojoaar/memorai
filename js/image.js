@@ -101,15 +101,14 @@ window.App = window.App || {};
     var end = ta.selectionEnd;
     var hasSelection = start !== end;
     var selected = hasSelection ? ta.value.substring(start, end) : '';
-    var url = prompt('Enter URL:', 'https://');
-    if (!url) return;
     var text = hasSelection ? selected : 'link text';
+    var placeholder = 'url';
     if (hasSelection) {
-      ta.value = ta.value.substring(0, start) + '[' + text + '](' + url + ')' + ta.value.substring(end);
+      ta.value = ta.value.substring(0, start) + '[' + text + '](' + placeholder + ')' + ta.value.substring(end);
       ta.selectionStart = start + text.length + 3;
-      ta.selectionEnd = start + text.length + 3 + url.length;
+      ta.selectionEnd = ta.selectionStart + placeholder.length;
     } else {
-      App.insertMarkdownAtCursor('[' + text + '](' + url + ')');
+      App.insertMarkdownAtCursor('[' + text + '](' + placeholder + ')');
       ta.selectionStart = start + 1;
       ta.selectionEnd = start + 1 + text.length;
     }
