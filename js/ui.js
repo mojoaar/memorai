@@ -155,6 +155,7 @@ window.App = window.App || {};
     var content = dom.noteContent.value;
     var tags = App.getActiveTags();
     App.updateNote(state.activeNoteId, { title: title, content: content, tags: tags });
+    App.renderNotesList();
     dom.lastModified.textContent = 'Last modified: ' + App.formatDateTime(Date.now());
   };
 
