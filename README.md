@@ -69,6 +69,22 @@ MIT — see [LICENSE](LICENSE)
 
 ## Changelog
 
+### 0.1.1
+
+- Removed Gist sync, replaced with GitHub Repo sync via Contents API
+- Notes stored as `.md` files with YAML frontmatter — openable in any editor
+- Images stored as separate files in repo instead of inline base64
+- URL hash routing — share and bookmark individual notes
+- Export single notes as `.md` with frontmatter
+- Danger Zone: wipe all remote and local data with DELETE confirmation
+- Server config via `config.json` with field locking and title/description override
+- SEO: Open Graph, Twitter Cards, JSON-LD, canonical URL, `robots.txt`
+- 3 new themes: Tokyo Night, Dracula, One Dark (12 total)
+- Icon picker with 147 Lucide icons
+- Browser favicon as inline data URI for WebKit compatibility
+- Service worker with cache versioning, API filtering, and activate cleanup
+- Bug fixes: XSS sanitization, localStorage error handling, auto-save sidebar update
+
 ### 0.1.0 — Initial Release
 
 - Markdown editor with live preview and formatting toolbar
