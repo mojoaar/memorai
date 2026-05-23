@@ -155,6 +155,9 @@ window.App = window.App || {};
         else if (fmt === 'link') App.insertLink();
         else if (fmt === 'code') App.insertCode();
         else if (fmt === 'table') App.insertTable();
+        else if (fmt === 'ul') App.insertList('-');
+        else if (fmt === 'ol') App.insertList('1.');
+        else if (fmt === 'task') App.insertList('- [ ]');
       });
     });
 

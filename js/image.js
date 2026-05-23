@@ -144,4 +144,16 @@ window.App = window.App || {};
     ta.focus();
     App.scheduleSave();
   };
+
+  App.insertList = function (prefix) {
+    var ta = dom.noteContent;
+    var start = ta.selectionStart;
+    var lineStart = ta.value.lastIndexOf('\n', start - 1) + 1;
+    var before = ta.value.substring(0, lineStart);
+    var after = ta.value.substring(lineStart);
+    ta.value = before + prefix + ' ' + after;
+    ta.selectionStart = ta.selectionEnd = lineStart + prefix.length + 1;
+    ta.focus();
+    App.scheduleSave();
+  };
 })();
