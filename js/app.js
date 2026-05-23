@@ -6,17 +6,21 @@ window.App = window.App || {};
   var state = App.state;
 
   App.configureMarked = function () {
-    if (typeof marked !== 'undefined') {
-      var opts = { breaks: true, gfm: true };
-      if (typeof hljs !== 'undefined') {
-        opts.highlight = function (code, lang) {
+    if (typeof marked === 'undefined') return;
+    try {
+      marked.use({ breaks: true, gfm: true });
+    } catch (e) {
+      marked.setOptions({ breaks: true, gfm: true });
+    }
+    if (typeof hljs !== 'undefined') {
+      marked.setOptions({
+        highlight: function (code, lang) {
           if (lang && hljs.getLanguage(lang)) {
             return hljs.highlight(code, { language: lang }).value;
           }
           return code;
-        };
-      }
-      marked.setOptions(opts);
+        }
+      });
     }
   };
 
