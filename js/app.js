@@ -7,7 +7,7 @@ window.App = window.App || {};
 
   App.configureMarked = function () {
     if (typeof marked === 'undefined') return;
-    var opts = { breaks: true, gfm: true };
+    var opts = { gfm: true };
     if (typeof hljs !== 'undefined') {
       opts.highlight = function (code, lang) {
         if (lang && hljs.getLanguage(lang)) {
