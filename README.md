@@ -65,6 +65,16 @@ All fields are optional. See `config.example.json` for details.
 
 If you find memorai useful, consider [buying me a coffee](https://buymeacoffee.com/mojoaar).
 
+## Credits
+
+Built with these excellent open-source libraries:
+
+- [marked](https://marked.js.org/) — Markdown parser
+- [highlight.js](https://highlightjs.org/) — Syntax highlighting
+- [DOMPurify](https://github.com/cure53/DOMPurify) — XSS sanitization
+- [Lucide](https://lucide.dev/) — Icons (embedded SVG paths)
+- [Inter](https://fonts.google.com/specimen/Inter) & [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) — Fonts via Google Fonts
+
 ## License
 
 MIT — see [LICENSE](LICENSE)
