@@ -27,10 +27,14 @@ window.App = window.App || {};
   App.updateNote = function (id, updates) {
     var idx = state.notes.findIndex(function (n) { return n.id === id; });
     if (idx === -1) return;
-    Object.assign(state.notes[idx], updates, { updatedAt: Date.now() });
-    if ('title' in updates || 'content' in updates) {
-      if (!state.notes[idx].pinned) {
-        var note = state.notes.splice(idx, 1)[0];
+    var note = state.notes[idx];
+    var changed = ('title' in updates && updates.title !== note.title) ||
+                  ('content' in updates && updates.content !== note.content);
+    Object.assign(note, updates);
+    if (changed) {
+      note.updatedAt = Date.now();
+      if (!note.pinned) {
+        state.notes.splice(idx, 1);
         var insertIdx = state.notes.findIndex(function (n) { return !n.pinned; });
         state.notes.splice(insertIdx === -1 ? state.notes.length : insertIdx, 0, note);
       }
