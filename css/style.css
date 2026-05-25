@@ -294,8 +294,19 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
 .note-preview a { color: var(--accent); text-decoration: none; }
 .note-preview a:hover { text-decoration: underline; }
 .note-preview code { font-family: var(--font-mono); font-size: 0.85em; background: var(--bg-elevated); padding: 2px 6px; border-radius: 4px; color: var(--accent); }
-.note-preview pre { background: var(--bg-elevated); padding: 14px 16px; border-radius: var(--radius); overflow-x: auto; margin: 12px 0; border: 1px solid var(--border); }
+.note-preview pre { background: var(--bg-elevated); padding: 14px 16px; border-radius: var(--radius); overflow-x: auto; margin: 12px 0; border: 1px solid var(--border); position: relative; }
 .note-preview pre code { background: none; padding: 0; font-size: 0.85rem; color: var(--text); }
+
+/* Copy button */
+.code-copy-btn { position: absolute; top: 8px; right: 8px; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; padding: 0; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; opacity: 0; transition: opacity 0.15s, color 0.15s, background 0.15s; }
+.note-preview pre:hover .code-copy-btn { opacity: 1; }
+.code-copy-btn:hover { background: var(--bg-elevated); color: var(--text); }
+.code-copy-btn svg { pointer-events: none; }
+
+/* Line numbers */
+.note-preview pre.has-line-numbers { display: flex; align-items: flex-start; overflow-x: auto; padding: 14px 0; }
+.note-preview pre.has-line-numbers .ln-gutter { flex-shrink: 0; min-width: 2.5em; padding: 0 12px 0 16px; text-align: right; color: var(--text-faint); font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6; border-right: 1px solid var(--border); user-select: none; white-space: pre; }
+.note-preview pre.has-line-numbers code { flex: 1; padding: 0 16px; overflow-x: visible; white-space: pre; line-height: 1.6; }
 .note-preview blockquote { border-left: 3px solid var(--accent); padding-left: 14px; margin: 12px 0; color: var(--text-muted); font-style: italic; }
 .note-preview ul,.note-preview ol { padding-left: 20px; margin: 8px 0; }
 .note-preview li { margin-bottom: 4px; }

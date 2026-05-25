@@ -7,16 +7,22 @@ window.App = window.App || {};
 
   App.configureMarked = function () {
     if (typeof marked === 'undefined') return;
-    var opts = { breaks: true, gfm: true };
+    marked.use({ breaks: true, gfm: true });
     if (typeof hljs !== 'undefined') {
-      opts.highlight = function (code, lang) {
-        if (lang && hljs.getLanguage(lang)) {
-          return hljs.highlight(code, { language: lang }).value;
+      marked.use({
+        renderer: {
+          code: function (token) {
+            var code = token.text || '';
+            var lang = token.lang || '';
+            if (lang && hljs.getLanguage(lang)) {
+              var highlighted = hljs.highlight(code, { language: lang }).value;
+              return '<pre><code class="hljs language-' + lang + '">' + highlighted + '</code></pre>\n';
+            }
+            return '<pre><code class="hljs">' + hljs.highlightAuto(code).value + '</code></pre>\n';
+          }
         }
-        return code;
-      };
+      });
     }
-    marked.setOptions(opts);
   };
 
   App.init = function () {
@@ -179,6 +185,7 @@ window.App = window.App || {};
       dom.timeFormatSelect.value = state.settings.timeFormat;
       dom.noteDisplaySelect.value = state.settings.noteDisplay;
       dom.sortBySelect.value = state.settings.sortBy;
+      if (dom.codeLineNumbersSelect) dom.codeLineNumbersSelect.value = state.settings.codeLineNumbers ? 'true' : 'false';
       dom.githubToken.value = state.settings.githubToken || '';
       dom.repoInput.value = state.settings.repo || '';
       dom.branchInput.value = state.settings.branch || 'main';
@@ -205,6 +212,10 @@ window.App = window.App || {};
 
     dom.noteDisplaySelect.addEventListener('change', function () { state.settings.noteDisplay = dom.noteDisplaySelect.value; App.saveSettings(); App.renderNotesList(); });
     dom.sortBySelect.addEventListener('change', function () { state.settings.sortBy = dom.sortBySelect.value; App.saveSettings(); App.renderNotesList(); });
+    if (dom.codeLineNumbersSelect) dom.codeLineNumbersSelect.addEventListener('change', function () {
+      state.settings.codeLineNumbers = dom.codeLineNumbersSelect.value === 'true';
+      App.saveSettings();
+    });
 
     dom.githubToken.addEventListener('change', function () { App.saveSettings(); App.updateRepoDependentUI(); });
     dom.repoInput.addEventListener('change', function () { App.saveSettings(); App.updateRepoDependentUI(); });

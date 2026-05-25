@@ -5,13 +5,14 @@ window.App = window.App || {};
 
   App.STORE_NOTES = 'memorai_notes';
   App.STORE_SETTINGS = 'memorai_settings';
-  App.VERSION = '0.1.4';
+  App.VERSION = '0.1.5';
 
   App.DEFAULT_SETTINGS = {
     theme: 'catppuccin-dark',
     timeFormat: '24h',
     noteDisplay: 'full',
     sortBy: 'modified',
+    codeLineNumbers: false,
     githubToken: '',
     repo: '',
     branch: 'main',
@@ -65,6 +66,7 @@ window.App = window.App || {};
     timeFormatSelect: $('#timeFormatSelect'),
     noteDisplaySelect: $('#noteDisplaySelect'),
     sortBySelect: $('#sortBySelect'),
+    codeLineNumbersSelect: $('#codeLineNumbersSelect'),
     settingsVersion: $('#settingsVersion'),
     wipeBtn: $('#wipeBtn'),
     wipeConfirm: $('#wipeConfirm'),

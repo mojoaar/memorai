@@ -134,6 +134,64 @@ window.App = window.App || {};
     dom.editBtn.classList.remove('active');
     dom.previewBtn.classList.add('active');
     App.refreshIcons(dom.notePreview);
+    App.addCodeEnhancements(dom.notePreview);
+  };
+
+  App.addCodeEnhancements = function (container) {
+    var pres = container.querySelectorAll('pre');
+    pres.forEach(function (pre) {
+      var code = pre.querySelector('code');
+      if (!code) return;
+
+      // Copy button
+      var copyBtn = document.createElement('button');
+      copyBtn.className = 'code-copy-btn';
+      copyBtn.title = 'Copy code';
+      copyBtn.setAttribute('aria-label', 'Copy code');
+      var copyIcon = document.createElement('i');
+      copyIcon.setAttribute('data-lucide', 'copy');
+      copyIcon.setAttribute('width', '14');
+      copyIcon.setAttribute('height', '14');
+      copyBtn.appendChild(copyIcon);
+      copyBtn.addEventListener('click', function () {
+        var text = code.textContent;
+        if (!navigator.clipboard) return;
+        navigator.clipboard.writeText(text).then(function () {
+          copyBtn.innerHTML = '';
+          var checkIcon = document.createElement('i');
+          checkIcon.setAttribute('data-lucide', 'check');
+          checkIcon.setAttribute('width', '14');
+          checkIcon.setAttribute('height', '14');
+          copyBtn.appendChild(checkIcon);
+          App.refreshIcons(copyBtn);
+          setTimeout(function () {
+            copyBtn.innerHTML = '';
+            var icon = document.createElement('i');
+            icon.setAttribute('data-lucide', 'copy');
+            icon.setAttribute('width', '14');
+            icon.setAttribute('height', '14');
+            copyBtn.appendChild(icon);
+            App.refreshIcons(copyBtn);
+          }, 1500);
+        }).catch(function () {
+          App.toast('Failed to copy code', 'error');
+        });
+      });
+      pre.appendChild(copyBtn);
+      App.refreshIcons(copyBtn);
+
+      // Line numbers
+      if (state.settings.codeLineNumbers) {
+        var lines = code.textContent.split('\n');
+        if (lines.length > 0 && lines[lines.length - 1] === '') lines.pop();
+        var gutter = document.createElement('span');
+        gutter.className = 'ln-gutter';
+        gutter.setAttribute('aria-hidden', 'true');
+        gutter.textContent = lines.map(function (_, i) { return i + 1; }).join('\n');
+        pre.insertBefore(gutter, code);
+        pre.classList.add('has-line-numbers');
+      }
+    });
   };
 
   App.rewriteImageURLs = function (html) {

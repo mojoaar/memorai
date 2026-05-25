@@ -20,6 +20,7 @@ window.App = window.App || {};
       if (dom.timeFormatSelect) dom.timeFormatSelect.value = state.settings.timeFormat;
       if (dom.noteDisplaySelect) dom.noteDisplaySelect.value = state.settings.noteDisplay;
       if (dom.sortBySelect) dom.sortBySelect.value = state.settings.sortBy;
+      if (dom.codeLineNumbersSelect) dom.codeLineNumbersSelect.value = state.settings.codeLineNumbers ? 'true' : 'false';
     } catch (e) {
       state.settings = JSON.parse(JSON.stringify(App.DEFAULT_SETTINGS));
     }

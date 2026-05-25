@@ -83,6 +83,13 @@ MIT — see [LICENSE](LICENSE)
 
 ## Changelog
 
+### 0.1.5
+
+- Copy button on code blocks in preview — appears on hover, copies raw code to clipboard
+- Code line numbers setting — toggle on/off in Settings (off by default)
+- Fixed syntax highlighting: migrated from deprecated `marked.setOptions({ highlight })` to `marked.use({ renderer: { code } })` for compatibility with marked v5+
+- Unlanguaged code fences now fall back to `hljs.highlightAuto()` for best-effort highlighting
+
 ### 0.1.4
 
 - Expanded icon set to 228 Lucide icons (up from 161)
