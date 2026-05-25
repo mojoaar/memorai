@@ -255,5 +255,8 @@ window.App = window.App || {};
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' });
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      window.location.reload();
+    });
   }
 })();
