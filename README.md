@@ -81,6 +81,24 @@ MIT — see [LICENSE](LICENSE)
 
 ---
 
+## Troubleshooting
+
+### Browser not picking up a new version
+
+If the app appears stuck on an old version, paste the following into the browser DevTools console to unregister the service worker, clear all caches, and wipe localStorage, then reload:
+
+```js
+navigator.serviceWorker.getRegistrations()
+  .then(regs => Promise.all(regs.map(r => r.unregister())))
+  .then(() => caches.keys())
+  .then(keys => Promise.all(keys.map(k => caches.delete(k))))
+  .then(() => { localStorage.clear(); console.log('Done — reload now.'); });
+```
+
+Reload the page once after running this. Your notes are stored in GitHub — they will sync back on next pull.
+
+---
+
 ## Changelog
 
 ### 0.1.5
