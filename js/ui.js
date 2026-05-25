@@ -43,12 +43,14 @@ window.App = window.App || {};
   App.openNote = function (id) {
     var note = state.notes.find(function (n) { return n.id === id; });
     if (!note) return;
+    if (state.saveTimeout) { clearTimeout(state.saveTimeout); state.saveTimeout = null; }
+    if (state.activeNoteId) { App.doAutoSave(); }
     state.activeNoteId = id;
     dom.noteTitle.value = note.title;
     dom.noteContent.value = note.content;
     App.setActiveTags(note.tags || []);
     dom.lastModified.textContent = 'Last modified: ' + App.formatDateTime(note.updatedAt);
-    if (state.isPreview) { App.switchToPreview(); } else { App.switchToEdit(); }
+    if (state.isPreview) { App.switchToPreview(true); } else { App.switchToEdit(); }
     dom.editorEmpty.classList.add('hidden');
     dom.editorContent.classList.remove('hidden');
     dom.noteTitle.focus();
@@ -119,8 +121,8 @@ window.App = window.App || {};
     dom.previewBtn.classList.remove('active');
   };
 
-  App.switchToPreview = function () {
-    if (state.activeNoteId) { App.doAutoSave(); }
+  App.switchToPreview = function (skipSave) {
+    if (!skipSave && state.activeNoteId) { App.doAutoSave(); }
     state.isPreview = true;
     var html = App.renderMarkdown(dom.noteContent.value);
     html = App.processIconShortcodes(html);
