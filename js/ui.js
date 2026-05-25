@@ -48,7 +48,7 @@ window.App = window.App || {};
     dom.noteContent.value = note.content;
     App.setActiveTags(note.tags || []);
     dom.lastModified.textContent = 'Last modified: ' + App.formatDateTime(note.updatedAt);
-    App.switchToEdit();
+    if (state.isPreview) { App.switchToPreview(); } else { App.switchToEdit(); }
     dom.editorEmpty.classList.add('hidden');
     dom.editorContent.classList.remove('hidden');
     dom.noteTitle.focus();
