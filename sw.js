@@ -48,6 +48,8 @@ self.addEventListener('install', function (e) {
           });
         })
       );
+    }).then(function () {
+      return self.skipWaiting();
     })
   );
 });
@@ -60,6 +62,8 @@ self.addEventListener('activate', function (e) {
           return caches.delete(key);
         })
       );
+    }).then(function () {
+      return self.clients.claim();
     })
   );
 });
