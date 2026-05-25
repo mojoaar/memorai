@@ -101,6 +101,15 @@ Reload the page once after running this. Your notes are stored in GitHub — the
 
 ## Changelog
 
+### 0.1.6
+
+- Preview mode persists when switching between notes
+- Fixed note reordering: notes no longer jump position when clicking between them — `updatedAt` and list order only change when content actually changes
+- Fixed unsaved edits being discarded when switching notes quickly — pending save is now flushed for the previous note before switching context
+- Auto-reload page when a new service worker takes control (ensures WebKit picks up updates without manual intervention)
+- Service worker: `skipWaiting` + `clients.claim` for immediate activation on update
+- Service worker: registered with `updateViaCache: 'none'` to bypass HTTP cache on update checks
+
 ### 0.1.5
 
 - Copy button on code blocks in preview — appears on hover, copies raw code to clipboard
