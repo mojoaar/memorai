@@ -94,12 +94,26 @@ window.App = window.App || {};
     dom.syncBtn.disabled = true;
     try {
       App.oneTimeMigration();
+
+      // Build remote SHA map upfront — needed to PUT existing files without a stored _sha
+      var remoteSHAs = {};
+      var remoteFiles = [];
+      try {
+        var listing = await repoAPI('/notes?ref=' + s.branch, 'GET');
+        if (Array.isArray(listing)) {
+          remoteFiles = listing;
+          listing.forEach(function (rf) {
+            remoteSHAs[rf.name.replace('.md', '')] = rf.sha;
+          });
+        }
+      } catch (e) { /* notes/ may not exist yet on an empty repo */ }
+
       for (var i = 0; i < state.notes.length; i++) {
         var note = state.notes[i];
         var md = App.noteToMD(note);
         var path = '/notes/' + note.id + '.md';
         var message = 'Update ' + (note.title || 'Untitled');
-        var sha = note._sha;
+        var sha = note._sha || remoteSHAs[note.id];
         var body = { message: message, content: btoaSafe(md), branch: s.branch };
         if (sha) body.sha = sha;
         var result = await repoAPI(path, 'PUT', body);
@@ -107,10 +121,10 @@ window.App = window.App || {};
           note._sha = result.content.sha;
         }
       }
-      // Delete remote notes that no longer exist locally
+
+      // Delete remote notes that no longer exist locally — reuse listing from above
       try {
-        var remoteFiles = await repoAPI('/notes?ref=' + s.branch, 'GET');
-        if (Array.isArray(remoteFiles)) {
+        if (remoteFiles.length > 0) {
           var localIds = new Set(state.notes.map(function (n) { return n.id; }));
           for (var j = 0; j < remoteFiles.length; j++) {
             var rf = remoteFiles[j];
@@ -128,6 +142,7 @@ window.App = window.App || {};
       } catch (e) {
         console.warn('Could not check remote deletions:', e);
       }
+
       App.pushAllImages().then(function () {
         App.saveNotes();
         dom.syncLabel.textContent = 'Sync with Repo';
