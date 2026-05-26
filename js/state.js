@@ -8,7 +8,7 @@ window.App = window.App || {};
   App.VERSION = '0.1.6';
 
   App.DEFAULT_SETTINGS = {
-    theme: 'catppuccin-dark',
+    theme: 'catppuccin-mocha',
     timeFormat: '24h',
     noteDisplay: 'full',
     sortBy: 'modified',
@@ -17,6 +17,8 @@ window.App = window.App || {};
     repo: '',
     branch: 'main',
   };
+
+  App.LIGHT_THEMES = ['catppuccin-latte', 'nord-light', 'one-light', 'tokyo-night-light', 'dracula-light', 'github-light'];
 
   function $(sel) { return document.querySelector(sel); }
 

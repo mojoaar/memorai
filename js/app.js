@@ -174,9 +174,18 @@ window.App = window.App || {};
     dom.sidebarToggle.addEventListener('click', App.toggleSidebar);
 
     dom.themeToggle.addEventListener('click', function () {
-      var isDark = state.settings.theme.indexOf('dark') !== -1;
-      var palette = state.settings.theme.replace(/-dark|-light/, '');
-      App.setTheme(palette + (isDark ? '-light' : '-dark'));
+      var theme = state.settings.theme;
+      var isLight = App.LIGHT_THEMES.indexOf(theme) !== -1;
+      var next;
+      if (theme === 'catppuccin-latte') {
+        next = 'catppuccin-mocha';
+      } else if (theme === 'catppuccin-frappe' || theme === 'catppuccin-macchiato' || theme === 'catppuccin-mocha') {
+        next = 'catppuccin-latte';
+      } else {
+        var palette = theme.replace(/-dark$|-light$/, '');
+        next = palette + (isLight ? '-dark' : '-light');
+      }
+      App.setTheme(next);
     });
 
     dom.settingsToggle.addEventListener('click', function () {

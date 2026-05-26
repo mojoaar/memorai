@@ -13,6 +13,9 @@ window.App = window.App || {};
         var parsed = JSON.parse(raw);
         Object.keys(parsed).forEach(function (k) { state.settings[k] = parsed[k]; });
       }
+      // Migrate old catppuccin theme IDs to named palette IDs
+      if (state.settings.theme === 'catppuccin-dark')  state.settings.theme = 'catppuccin-mocha';
+      if (state.settings.theme === 'catppuccin-light') state.settings.theme = 'catppuccin-latte';
       dom.githubToken.value = state.settings.githubToken || '';
       dom.repoInput.value = state.settings.repo || '';
       dom.branchInput.value = state.settings.branch || 'main';

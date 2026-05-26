@@ -1,23 +1,43 @@
 /* === Themes === */
 
-/* Catppuccin Mocha (Dark) */
-[data-theme="catppuccin-dark"] {
-  --bg: #1e1e2e; --bg-alt: #181825; --bg-elevated: #313244; --bg-hover: #45475a;
-  --border: #313244; --border-focus: #b4befe;
-  --text: #cdd6f4; --text-muted: #a6adc8; --text-faint: #6c7086;
-  --accent: #cba6f7; --accent-hover: #f5c2e7;
-  --danger: #f38ba8; --danger-hover: #eba0ac;
-  --success: #a6e3a1; --warning: #f9e2af; --info: #89dceb;
-}
-
 /* Catppuccin Latte (Light) */
-[data-theme="catppuccin-light"] {
+[data-theme="catppuccin-latte"] {
   --bg: #eff1f5; --bg-alt: #e6e9ef; --bg-elevated: #ccd0da; --bg-hover: #bcc0cc;
   --border: #ccd0da; --border-focus: #7287fd;
   --text: #4c4f69; --text-muted: #6c6f85; --text-faint: #9ca0b0;
   --accent: #8839ef; --accent-hover: #ea76cb;
   --danger: #d20f39; --danger-hover: #e64553;
   --success: #40a02b; --warning: #df8e1d; --info: #04a5e5;
+}
+
+/* Catppuccin Frappé */
+[data-theme="catppuccin-frappe"] {
+  --bg: #303446; --bg-alt: #292c3c; --bg-elevated: #414559; --bg-hover: #51576d;
+  --border: #414559; --border-focus: #babbf1;
+  --text: #c6d0f5; --text-muted: #b5bfe2; --text-faint: #737994;
+  --accent: #ca9ee6; --accent-hover: #f4b8e4;
+  --danger: #e78284; --danger-hover: #ea999c;
+  --success: #a6d189; --warning: #e5c890; --info: #99d1db;
+}
+
+/* Catppuccin Macchiato */
+[data-theme="catppuccin-macchiato"] {
+  --bg: #24273a; --bg-alt: #1e2030; --bg-elevated: #363a4f; --bg-hover: #494d64;
+  --border: #363a4f; --border-focus: #b7bdf8;
+  --text: #cad3f5; --text-muted: #b8c0e0; --text-faint: #6e738d;
+  --accent: #c6a0f6; --accent-hover: #f5bde6;
+  --danger: #ed8796; --danger-hover: #ee99a0;
+  --success: #a6da95; --warning: #eed49f; --info: #8bd5ca;
+}
+
+/* Catppuccin Mocha */
+[data-theme="catppuccin-mocha"] {
+  --bg: #1e1e2e; --bg-alt: #181825; --bg-elevated: #313244; --bg-hover: #45475a;
+  --border: #313244; --border-focus: #b4befe;
+  --text: #cdd6f4; --text-muted: #a6adc8; --text-faint: #6c7086;
+  --accent: #cba6f7; --accent-hover: #f5c2e7;
+  --danger: #f38ba8; --danger-hover: #eba0ac;
+  --success: #a6e3a1; --warning: #f9e2af; --info: #89dceb;
 }
 
 /* Nord Dark */

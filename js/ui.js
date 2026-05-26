@@ -99,7 +99,7 @@ window.App = window.App || {};
   };
 
   App.updateThemeIcon = function () {
-    var isDark = state.settings.theme.indexOf('dark') !== -1;
+    var isDark = App.LIGHT_THEMES.indexOf(state.settings.theme) === -1;
     var btn = dom.themeToggle;
     if (!btn) return;
     var existing = btn.querySelector('svg[id="themeToggleIcon"], i#themeToggleIcon');
