@@ -455,6 +455,86 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
 .toast.info { background: var(--info); color: var(--bg); }
 @keyframes toastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+/* Night Owl Dark */
+[data-theme="night-owl-dark"] {
+  --bg: #011627; --bg-alt: #01111d; --bg-elevated: #0b2942; --bg-hover: #122d42;
+  --border: #1d3b53; --border-focus: #82aaff;
+  --text: #d6deeb; --text-muted: #7fdbca; --text-faint: #4d6a7a;
+  --accent: #82aaff; --accent-hover: #5ca7e4;
+  --danger: #ef5350; --danger-hover: #c62828;
+  --success: #addb67; --warning: #ecc48d; --info: #7fdbca;
+}
+
+/* Night Owl Light */
+[data-theme="night-owl-light"] {
+  --bg: #fbfbfb; --bg-alt: #f0f4f8; --bg-elevated: #e4eaf0; --bg-hover: #d6dfe8;
+  --border: #d3dce6; --border-focus: #4876d6;
+  --text: #403f53; --text-muted: #566370; --text-faint: #93a1a1;
+  --accent: #4876d6; --accent-hover: #3a67c8;
+  --danger: #de3d3b; --danger-hover: #b52b2a;
+  --success: #2aa298; --warning: #d97e00; --info: #2aa298;
+}
+
+/* Cyberpunk Dark */
+[data-theme="cyberpunk-dark"] {
+  --bg: #0d0d1a; --bg-alt: #080810; --bg-elevated: #151528; --bg-hover: #1c1c35;
+  --border: #2a2a50; --border-focus: #fcee0a;
+  --text: #e0e0ff; --text-muted: #00fff7; --text-faint: #4a4a80;
+  --accent: #fcee0a; --accent-hover: #e0d400;
+  --danger: #ff003c; --danger-hover: #cc002f;
+  --success: #00ff99; --warning: #ff9900; --info: #00fff7;
+}
+
+/* Cyberpunk Light */
+[data-theme="cyberpunk-light"] {
+  --bg: #f0edff; --bg-alt: #e5e0ff; --bg-elevated: #d8d0f5; --bg-hover: #ccc0ee;
+  --border: #b8a8e8; --border-focus: #7700cc;
+  --text: #1a0a3d; --text-muted: #4a2a7a; --text-faint: #8060a0;
+  --accent: #7700cc; --accent-hover: #5500aa;
+  --danger: #cc0044; --danger-hover: #aa0033;
+  --success: #006633; --warning: #cc7700; --info: #005599;
+}
+
+/* Gruvbox Material Dark */
+[data-theme="gruvbox-dark"] {
+  --bg: #282828; --bg-alt: #1d2021; --bg-elevated: #32302f; --bg-hover: #3c3836;
+  --border: #3c3836; --border-focus: #a9b665;
+  --text: #d4be98; --text-muted: #a89984; --text-faint: #7c6f64;
+  --accent: #a9b665; --accent-hover: #89966a;
+  --danger: #ea6962; --danger-hover: #c04f4a;
+  --success: #a9b665; --warning: #e78a4e; --info: #7daea3;
+}
+
+/* Gruvbox Material Light */
+[data-theme="gruvbox-light"] {
+  --bg: #fbf1c7; --bg-alt: #f2e5bc; --bg-elevated: #ebdbb2; --bg-hover: #d5c4a1;
+  --border: #d5c4a1; --border-focus: #6f8352;
+  --text: #3c3836; --text-muted: #654735; --text-faint: #a89984;
+  --accent: #6f8352; --accent-hover: #576840;
+  --danger: #9d0006; --danger-hover: #7a0005;
+  --success: #6f8352; --warning: #af3a03; --info: #076678;
+}
+
+/* Ayu Dark */
+[data-theme="ayu-dark"] {
+  --bg: #0d1017; --bg-alt: #080c12; --bg-elevated: #131a24; --bg-hover: #1a2332;
+  --border: #1e2b38; --border-focus: #e6b450;
+  --text: #bfbdb6; --text-muted: #8a9199; --text-faint: #3d4f61;
+  --accent: #e6b450; --accent-hover: #c99a3e;
+  --danger: #f07178; --danger-hover: #c7575e;
+  --success: #aad94c; --warning: #ff8f40; --info: #39bae6;
+}
+
+/* Ayu Light */
+[data-theme="ayu-light"] {
+  --bg: #f8f9fa; --bg-alt: #f0f0f0; --bg-elevated: #e5e6e8; --bg-hover: #d8d9dc;
+  --border: #d0d1d5; --border-focus: #ff9940;
+  --text: #575f66; --text-muted: #8a9199; --text-faint: #adb1b8;
+  --accent: #ff9940; --accent-hover: #e6872e;
+  --danger: #f07178; --danger-hover: #c7575e;
+  --success: #86b300; --warning: #f29718; --info: #55b4d4;
+}
+
 /* === Utils === */
 .hidden { display: none !important; }
 ::-webkit-scrollbar { width: 6px; }

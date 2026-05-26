@@ -8,7 +8,7 @@ window.App = window.App || {};
   App.VERSION = '0.1.6';
 
   App.DEFAULT_SETTINGS = {
-    theme: 'catppuccin-mocha',
+    theme: 'catppuccin-macchiato',
     timeFormat: '24h',
     noteDisplay: 'full',
     sortBy: 'modified',
@@ -18,7 +18,7 @@ window.App = window.App || {};
     branch: 'main',
   };
 
-  App.LIGHT_THEMES = ['catppuccin-latte', 'nord-light', 'one-light', 'tokyo-night-light', 'dracula-light', 'github-light'];
+  App.LIGHT_THEMES = ['catppuccin-latte', 'nord-light', 'one-light', 'tokyo-night-light', 'dracula-light', 'github-light', 'night-owl-light', 'cyberpunk-light', 'gruvbox-light', 'ayu-light'];
 
   function $(sel) { return document.querySelector(sel); }
 
