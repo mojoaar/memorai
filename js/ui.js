@@ -86,6 +86,11 @@ window.App = window.App || {};
     dom.noteCount.textContent = state.notes.length + ' note' + (state.notes.length !== 1 ? 's' : '');
   };
 
+  App.themeToDropdownValue = function (theme) {
+    var catppuccin = ['catppuccin-latte', 'catppuccin-frappe', 'catppuccin-macchiato', 'catppuccin-mocha'];
+    return catppuccin.indexOf(theme) !== -1 ? theme : theme.replace(/-dark$|-light$/, '');
+  };
+
   App.applyTheme = function () {
     document.documentElement.setAttribute('data-theme', state.settings.theme);
   };
@@ -93,7 +98,7 @@ window.App = window.App || {};
   App.setTheme = function (theme) {
     state.settings.theme = theme;
     App.applyTheme();
-    if (dom.themeSelect) dom.themeSelect.value = theme;
+    if (dom.themeSelect) dom.themeSelect.value = App.themeToDropdownValue(theme);
     App.updateThemeIcon();
     App.saveSettings();
   };

@@ -190,7 +190,7 @@ window.App = window.App || {};
 
     dom.settingsToggle.addEventListener('click', function () {
       dom.settingsModal.classList.remove('hidden');
-      dom.themeSelect.value = state.settings.theme;
+      dom.themeSelect.value = App.themeToDropdownValue(state.settings.theme);
       dom.timeFormatSelect.value = state.settings.timeFormat;
       dom.noteDisplaySelect.value = state.settings.noteDisplay;
       dom.sortBySelect.value = state.settings.sortBy;
@@ -219,7 +219,16 @@ window.App = window.App || {};
       if (e.target === dom.settingsModal) { closeSettings(); }
     });
 
-    dom.themeSelect.addEventListener('change', function () { App.setTheme(dom.themeSelect.value); });
+    dom.themeSelect.addEventListener('change', function () {
+      var val = dom.themeSelect.value;
+      var catppuccin = ['catppuccin-latte', 'catppuccin-frappe', 'catppuccin-macchiato', 'catppuccin-mocha'];
+      if (catppuccin.indexOf(val) !== -1) {
+        App.setTheme(val);
+      } else {
+        var isLight = App.LIGHT_THEMES.indexOf(state.settings.theme) !== -1;
+        App.setTheme(val + (isLight ? '-light' : '-dark'));
+      }
+    });
 
     dom.timeFormatSelect.addEventListener('change', function () {
       state.settings.timeFormat = dom.timeFormatSelect.value;
