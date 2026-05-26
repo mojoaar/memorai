@@ -119,6 +119,7 @@ Reload the page once after running this. Your notes are stored in GitHub — the
 - Fixed sync push failing with "sha wasn't supplied" when the repo contains notes not present in the local session — remote SHAs are now fetched upfront before pushing
 - Fixed sync push failing with "does not match" conflict error — freshly fetched remote SHA now takes priority over stale locally-stored SHA
 - Removed redundant API call during push: remote note listing is reused for both SHA resolution and deletion check
+- Error toasts now persist for 8 seconds (up from 3s) and include a copy button to capture the full error message
 
 ### 0.1.7
 
