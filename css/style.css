@@ -449,10 +449,13 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
 
 /* === Toast === */
 .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 300; display: flex; flex-direction: column-reverse; gap: 8px; }
-.toast { padding: 12px 18px; border-radius: var(--radius); font-size: 0.85rem; font-weight: 500; box-shadow: var(--shadow-lg); animation: toastIn 0.25s ease; max-width: 320px; }
+.toast { padding: 12px 18px; border-radius: var(--radius); font-size: 0.85rem; font-weight: 500; box-shadow: var(--shadow-lg); animation: toastIn 0.25s ease; max-width: 360px; display: flex; align-items: flex-start; gap: 10px; }
 .toast.success { background: var(--success); color: var(--bg); }
 .toast.error { background: var(--danger); color: var(--bg); }
 .toast.info { background: var(--info); color: var(--bg); }
+.toast span { flex: 1; }
+.toast-copy-btn { flex-shrink: 0; background: none; border: none; cursor: pointer; color: inherit; opacity: 0.75; padding: 1px; display: flex; align-items: center; justify-content: center; border-radius: 3px; transition: opacity 0.15s; }
+.toast-copy-btn:hover { opacity: 1; }
 @keyframes toastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Night Owl Dark */
