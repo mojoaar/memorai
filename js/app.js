@@ -190,15 +190,24 @@ window.App = window.App || {};
       dom.repoInput.value = state.settings.repo || '';
       dom.branchInput.value = state.settings.branch || 'main';
       if (dom.settingsVersion) dom.settingsVersion.textContent = 'v' + App.VERSION;
+      if (dom.githubStatus) { dom.githubStatus.textContent = ''; dom.githubStatus.className = 'github-status'; }
       App.disableServerFields();
       App.updateRepoDependentUI();
       App.refreshIcons(dom.settingsModal);
     });
 
-    dom.settingsClose.addEventListener('click', function () { dom.settingsModal.classList.add('hidden'); App.hideWipeConfirm(); App.saveSettings(); App.updateRepoDependentUI(); });
+    function closeSettings() {
+      dom.settingsModal.classList.add('hidden');
+      App.hideWipeConfirm();
+      if (dom.githubStatus) { dom.githubStatus.textContent = ''; dom.githubStatus.className = 'github-status'; }
+      App.saveSettings();
+      App.updateRepoDependentUI();
+    }
+
+    dom.settingsClose.addEventListener('click', closeSettings);
 
     dom.settingsModal.addEventListener('click', function (e) {
-      if (e.target === dom.settingsModal) { dom.settingsModal.classList.add('hidden'); App.hideWipeConfirm(); App.saveSettings(); App.updateRepoDependentUI(); }
+      if (e.target === dom.settingsModal) { closeSettings(); }
     });
 
     dom.themeSelect.addEventListener('change', function () { App.setTheme(dom.themeSelect.value); });
@@ -220,6 +229,35 @@ window.App = window.App || {};
     dom.githubToken.addEventListener('change', function () { App.saveSettings(); App.updateRepoDependentUI(); });
     dom.repoInput.addEventListener('change', function () { App.saveSettings(); App.updateRepoDependentUI(); });
     dom.branchInput.addEventListener('change', App.saveSettings);
+
+    dom.validateGithubBtn.addEventListener('click', function () {
+      var token = dom.githubToken.value.trim();
+      var repo  = dom.repoInput.value.trim();
+      var status = dom.githubStatus;
+      if (!token || !repo) {
+        status.textContent = 'Enter a token and repository first.';
+        status.className = 'github-status error';
+        return;
+      }
+      status.textContent = 'Checking…';
+      status.className = 'github-status';
+      fetch('https://api.github.com/repos/' + repo, {
+        headers: { Authorization: 'token ' + token }
+      }).then(function (r) {
+        if (r.ok) {
+          status.textContent = '✓ Connected to ' + repo;
+          status.className = 'github-status success';
+        } else {
+          return r.json().then(function (body) {
+            status.textContent = 'Error ' + r.status + ': ' + (body.message || r.statusText);
+            status.className = 'github-status error';
+          });
+        }
+      }).catch(function () {
+        status.textContent = 'Connection failed. Check your network.';
+        status.className = 'github-status error';
+      });
+    });
 
     dom.syncBtn.addEventListener('click', App.handleSync);
 

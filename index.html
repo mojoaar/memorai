@@ -254,22 +254,31 @@
               <option value="true">On</option>
             </select>
           </div>
-          <div class="setting-group">
-            <label class="setting-label" for="githubToken">GitHub Personal Access Token</label>
-            <input type="password" id="githubToken" class="setting-input" placeholder="ghp_...">
-            <p class="setting-hint">Create a token with <strong>repo</strong> scope at <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">github.com/settings/tokens</a></p>
-            <span class="server-field-hint hidden" id="githubTokenHint">Managed by server config</span>
-          </div>
-          <div class="setting-group">
-            <label class="setting-label" for="repoInput">GitHub Repository</label>
-            <input type="text" id="repoInput" class="setting-input" placeholder="owner/repo-name">
-            <p class="setting-hint">Example: <strong>mojoaar/memorai-data</strong></p>
-            <span class="server-field-hint hidden" id="repoHint">Managed by server config</span>
-          </div>
-          <div class="setting-group">
-            <label class="setting-label" for="branchInput">Branch</label>
-            <input type="text" id="branchInput" class="setting-input" placeholder="main">
-            <span class="server-field-hint hidden" id="branchHint">Managed by server config</span>
+          <div class="github-settings" id="settingsGithub">
+            <div class="setting-group">
+              <label class="setting-label" for="githubToken">GitHub Personal Access Token</label>
+              <input type="password" id="githubToken" class="setting-input" placeholder="ghp_...">
+              <p class="setting-hint">Create a token with <strong>repo</strong> scope at <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">github.com/settings/tokens</a></p>
+              <span class="server-field-hint hidden" id="githubTokenHint">Managed by server config</span>
+            </div>
+            <div class="setting-group">
+              <label class="setting-label" for="repoInput">GitHub Repository</label>
+              <input type="text" id="repoInput" class="setting-input" placeholder="owner/repo-name">
+              <p class="setting-hint">Example: <strong>mojoaar/memorai-data</strong></p>
+              <span class="server-field-hint hidden" id="repoHint">Managed by server config</span>
+            </div>
+            <div class="setting-group">
+              <label class="setting-label" for="branchInput">Branch</label>
+              <input type="text" id="branchInput" class="setting-input" placeholder="main">
+              <span class="server-field-hint hidden" id="branchHint">Managed by server config</span>
+            </div>
+            <div class="github-validate-row">
+              <button class="btn-secondary btn-sm" id="validateGithubBtn">
+                <i data-lucide="check-circle"></i>
+                <span>Validate Connection</span>
+              </button>
+              <span class="github-status" id="githubStatus"></span>
+            </div>
           </div>
           <div class="setting-group">
             <label class="setting-label">Data</label>

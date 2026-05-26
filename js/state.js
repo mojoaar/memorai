@@ -68,11 +68,13 @@ window.App = window.App || {};
     sortBySelect: $('#sortBySelect'),
     codeLineNumbersSelect: $('#codeLineNumbersSelect'),
     settingsVersion: $('#settingsVersion'),
-    wipeBtn: $('#wipeBtn'),
-    wipeConfirm: $('#wipeConfirm'),
-    wipeInput: $('#wipeInput'),
-    wipeConfirmBtn: $('#wipeConfirmBtn'),
-  };
+  wipeBtn: $('#wipeBtn'),
+  wipeConfirm: $('#wipeConfirm'),
+  wipeInput: $('#wipeInput'),
+  wipeConfirmBtn: $('#wipeConfirmBtn'),
+  validateGithubBtn: $('#validateGithubBtn'),
+  githubStatus: $('#githubStatus'),
+};
 
   App.state = {
     notes: [],
