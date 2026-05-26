@@ -114,6 +114,11 @@ Reload the page once after running this. Your notes are stored in GitHub — the
 
 ## Changelog
 
+### 0.1.8
+
+- Fixed sync push failing with "sha wasn't supplied" when the repo contains notes not present in the local session — remote SHAs are now fetched upfront before pushing
+- Removed redundant API call during push: remote note listing is reused for both SHA resolution and deletion check
+
 ### 0.1.7
 
 - Added 4 new themes: Night Owl, Cyberpunk 2077, Gruvbox Material, Ayu — each with dark and light variants
