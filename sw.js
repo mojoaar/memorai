@@ -1,4 +1,4 @@
-var CACHE = 'memorai-v0.1.6';
+var CACHE = 'memorai-v0.1.7';
 var URLS = [
   '/',
   'index.html',

@@ -18,7 +18,7 @@ Take notes in markdown, sync them to GitHub, and access them anywhere. A lightwe
 - **URL hash routing** — share notes via link
 - **Export** — individual notes as `.md` or full backup as JSON
 - **Server config** — deploy with `config.json` for shared settings
-- **228 Lucide icons** — embeddable inline via `:icon-name:` syntax
+- **277 Lucide icons** — embeddable inline via `:icon-name:` syntax
 - **SEO** — Open Graph, Twitter Cards, JSON-LD, canonical URL
 
 ## Quick Start
@@ -100,6 +100,12 @@ Reload the page once after running this. Your notes are stored in GitHub — the
 ---
 
 ## Changelog
+
+### 0.1.7
+
+- Expanded icon set to 277 Lucide icons (up from 228)
+- 49 new icons: app-window, app-window-mac, arrow-big-up, arrow-big-up-dash, blocks, bot, bot-message-square, book-up, book-up-2, box, boxes, brain-circuit, brain-cog, bug-off, bug-play, chart-no-axes-gantt, circle-dashed, circle-dot, circle-dot-dashed, circle-ellipsis, code-xml, database-backup, database-search, database-zap, dock, gallery-thumbnails, git-branch-minus, git-branch-plus, git-commit-horizontal, git-commit-vertical, git-compare, git-compare-arrows, hard-drive-download, hard-drive-upload, hexagon, message-square-code, monitor-cloud, panel-top, panels-top-left, parentheses, pi, scroll-text, shield-alert, shield-check, shield-half, skull, square-chevron-right, square-code
+- Code line numbers now enabled by default
 
 ### 0.1.6
 
