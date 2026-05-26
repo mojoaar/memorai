@@ -12,7 +12,7 @@ window.App = window.App || {};
     timeFormat: '24h',
     noteDisplay: 'full',
     sortBy: 'modified',
-    codeLineNumbers: false,
+    codeLineNumbers: true,
     githubToken: '',
     repo: '',
     branch: 'main',
