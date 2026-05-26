@@ -9,12 +9,12 @@ Take notes in markdown, sync them to GitHub, and access them anywhere. A lightwe
 ## Features
 
 - **Markdown editing** with live preview and formatting toolbar (bold, italic, headings, etc.)
-- **12 themes** — Catppuccin, Nord, Tokyo Night, Dracula, One Dark, GitHub
+- **13 themes** — Catppuccin (Latte, Frappé, Macchiato, Mocha), Ayu, Cyberpunk 2077, Dracula, GitHub, Gruvbox Material, Night Owl, Nord, One, Tokyo Night — each with dark & light variants; dark/light preference preserved when switching
 - **GitHub Repo sync** — notes stored as `.md` files with YAML frontmatter
 - **Tags** with autocomplete and inline search
 - **PWA** — installable on desktop and mobile, works offline
 - **Image support** — paste, drag & drop, stored in repo
-- **Syntax highlighting** — code blocks support all major languages via highlight.js
+- **Syntax highlighting** — code blocks support all major languages via highlight.js, with optional line numbers and a copy button
 - **URL hash routing** — share notes via link
 - **Export** — individual notes as `.md` or full backup as JSON
 - **Server config** — deploy with `config.json` for shared settings
@@ -74,6 +74,19 @@ Built with these excellent open-source libraries:
 - [DOMPurify](https://github.com/cure53/DOMPurify) — XSS sanitization
 - [Lucide](https://lucide.dev/) — Icons (embedded SVG paths)
 - [Inter](https://fonts.google.com/specimen/Inter) & [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) — Fonts via Google Fonts
+
+Theme credits:
+
+- [Catppuccin](https://github.com/catppuccin/catppuccin) — Catppuccin community
+- [Night Owl](https://github.com/sdras/night-owl-vscode-theme) — Sarah Drasner
+- [Nord](https://www.nordtheme.com/) — Arctic Ice Studio
+- [Tokyo Night](https://github.com/enkia/tokyo-night-vscode-theme) — enkia
+- [Dracula](https://draculatheme.com/) — Zeno Rocha
+- [One Dark / One Light](https://github.com/atom/atom) — GitHub / Atom team
+- [GitHub Dark / Light](https://github.com/primer/github-vscode-theme) — GitHub Primer team
+- [Gruvbox Material](https://github.com/sainnhe/gruvbox-material) — sainnhe
+- [Ayu](https://github.com/dempfi/ayu) — dempfi
+- Cyberpunk 2077 — community-inspired palette
 
 ## License
 
