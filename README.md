@@ -101,6 +101,16 @@ Reload the page once after running this. Your notes are stored in GitHub — the
 
 ## Changelog
 
+### 0.1.7
+
+- Added 4 new themes: Night Owl, Cyberpunk 2077, Gruvbox Material, Ayu — each with dark and light variants
+- Theme dropdown simplified to one entry per family; switching themes preserves dark/light preference
+- Theme list sorted alphabetically
+- Default theme changed to Catppuccin Macchiato
+- Settings: GitHub fields grouped in a dedicated card with inline connection validation
+- Settings: custom chevron on theme/sort/display selects; danger zone uses flex column layout
+- Expanded icon set to 277 Lucide icons (up from 228)
+
 ### 0.1.6
 
 - Preview mode persists when switching between notes
