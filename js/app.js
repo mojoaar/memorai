@@ -241,10 +241,11 @@ window.App = window.App || {};
       }
       status.textContent = 'Checking…';
       status.className = 'github-status';
-      fetch('https://api.github.com/repos/' + repo, {
+      fetch('https://api.github.com/repos/' + repo + '/contents/', {
         headers: { Authorization: 'token ' + token }
       }).then(function (r) {
-        if (r.ok) {
+        if (r.ok || r.status === 404) {
+          // 404 on /contents/ means repo exists but is empty — still a valid connection
           status.textContent = '✓ Connected to ' + repo;
           status.className = 'github-status success';
         } else {
