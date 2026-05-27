@@ -4,7 +4,10 @@ Take notes in markdown, sync them to GitHub, and access them anywhere. A lightwe
 
 ## Screenshot
 
-![memorai](assets/memorai.png)
+| | | |
+| --- | --- | --- |
+| ![memorai 1](assets/memorai01.png) | ![memorai 2](assets/memorai02.png) | ![memorai 3](assets/memorai03.png) |
+| ![memorai 4](assets/memorai04.png) | ![memorai 5](assets/memorai05.png) | ![memorai 6](assets/memorai06.png) |
 
 ## Features
 
