@@ -10,7 +10,7 @@
 - State is mutable: `App.state.notes`, `App.state.settings`, `App.state.activeNoteId`, etc.
 - DOM refs cached at startup: `App.dom.sidebar`, `App.dom.noteTitle`, etc.
 - Version number in ONE place: `App.VERSION` in `js/state.js`
-- Current version: **0.1.8**; SW cache: **memorai-v0.1.8**
+- Current version: **0.1.9**; SW cache: **memorai-v0.1.9**
 
 ## Key subsystems
 
@@ -43,7 +43,8 @@
   3. Reuses the same listing to DELETE remote notes not present locally
   4. Pushes pending images
 - **On pull:** list + fetch, merge by ID (newer `updatedAt` wins), stores `_sha` from each fetched file
-- `App.handleSync()` pulls if local notes are empty, pushes otherwise
+- `App.handleSync()` pulls first (merges remote into local), then pushes the merged state — repo is the source of truth, preventing multi-device deletion
+- `App.silentPull()` — background pull with silent error handling, used on app load
 - `App.oneTimeMigration()` converts legacy base64 images on first push
 
 ### Toasts (`js/utils.js`)
@@ -65,7 +66,7 @@
 - Image insertion in editor: resized to max 1200px, stored as `images/YYYYMMDD-HHMMSS.png` refs
 
 ### Service Worker (`sw.js`)
-- Cache name: `memorai-v0.1.8` — bump on every release
+- Cache name: `memorai-v0.1.9` — bump on every release
 - Caches app origin + `cdn.jsdelivr.net` + `fonts.googleapis.com` + `fonts.gstatic.com`
 - Explicitly excludes `api.github.com` (sync API) to avoid stale data
 - `activate` handler purges old caches; `skipWaiting` + `clients.claim` for immediate activation

@@ -114,6 +114,13 @@ Reload the page once after running this. Your notes are stored in GitHub — the
 
 ## Changelog
 
+### 0.1.9
+
+- Sync now always pulls before pushing — the GitHub repo is the source of truth; this prevents notes created on other devices from being deleted during sync
+- Silent background pull on app load when a repo is configured — no toast, no UI blocking
+- Error toasts persist for 8 seconds (up from 3s) and include a copy button to capture the full error message
+- Fixed sync push failures: remote SHAs fetched upfront to prevent "sha wasn't supplied" (422) and "does not match" (409) errors
+
 ### 0.1.8
 
 - Fixed sync push failing with "sha wasn't supplied" when the repo contains notes not present in the local session — remote SHAs are now fetched upfront before pushing
