@@ -39,6 +39,7 @@ window.App = window.App || {};
     editBtn: $('#editBtn'),
     previewBtn: $('#previewBtn'),
     lastModified: $('#lastModified'),
+    wordCount: $('#wordCount'),
     backBtn: $('#backBtn'),
     pinBtn: $('#pinBtn'),
     deleteBtn: $('#deleteBtn'),

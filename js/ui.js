@@ -49,7 +49,7 @@ window.App = window.App || {};
     dom.noteTitle.value = note.title;
     dom.noteContent.value = note.content;
     App.setActiveTags(note.tags || []);
-    dom.lastModified.textContent = 'Last modified: ' + App.formatDateTime(note.updatedAt);
+    App.updateFooterMeta();
     if (state.isPreview) { App.switchToPreview(true); } else { App.switchToEdit(); }
     dom.editorEmpty.classList.add('hidden');
     dom.editorContent.classList.remove('hidden');
@@ -67,7 +67,7 @@ window.App = window.App || {};
     dom.noteTags.value = '';
     state.currentTags = [];
     dom.tagsList.innerHTML = '';
-    dom.lastModified.textContent = '';
+    App.updateFooterMeta();
     App.switchToEdit();
     dom.editorEmpty.classList.remove('hidden');
     dom.editorContent.classList.add('hidden');
@@ -84,6 +84,23 @@ window.App = window.App || {};
 
   App.updateNoteCount = function () {
     dom.noteCount.textContent = state.notes.length + ' note' + (state.notes.length !== 1 ? 's' : '');
+  };
+
+  App.countWords = function (text) {
+    var matches = (text || '').trim().match(/\b\S+\b/g);
+    return matches ? matches.length : 0;
+  };
+
+  App.updateFooterMeta = function () {
+    if (!state.activeNoteId) {
+      if (dom.lastModified) dom.lastModified.textContent = '';
+      if (dom.wordCount) dom.wordCount.textContent = '';
+      return;
+    }
+    var note = state.notes.find(function (n) { return n.id === state.activeNoteId; });
+    if (!note) return;
+    if (dom.lastModified) dom.lastModified.textContent = 'Last modified: ' + App.formatDateTime(note.updatedAt);
+    if (dom.wordCount) dom.wordCount.textContent = 'Words: ' + App.countWords(note.content);
   };
 
   App.themeToDropdownValue = function (theme) {
@@ -224,7 +241,7 @@ window.App = window.App || {};
     var tags = App.getActiveTags();
     App.updateNote(state.activeNoteId, { title: title, content: content, tags: tags });
     App.renderNotesList();
-    dom.lastModified.textContent = 'Last modified: ' + App.formatDateTime(Date.now());
+    App.updateFooterMeta();
   };
 
   App.toggleSidebar = function () {
