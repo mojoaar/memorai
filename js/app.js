@@ -46,6 +46,23 @@ window.App = window.App || {};
     App.updateThemeIcon();
     App.updateRepoDependentUI();
     App.routeFromHash();
+
+    // Silent background pull on app load — fetch latest notes without blocking the UI
+    if (state.settings.githubToken && state.settings.repo) {
+      (async function () {
+        try {
+          var result = await App.silentPull();
+          if (result.changed) {
+            App.saveNotes();
+            App.renderNotesList();
+            App.updateNoteCount();
+            if (state.activeNoteId && !state.notes.find(function (n) { return n.id === state.activeNoteId; })) {
+              App.showEmptyEditor();
+            }
+          }
+        } catch (e) { /* silently fail */ }
+      })();
+    }
   };
 
   App.routeFromHash = function () {

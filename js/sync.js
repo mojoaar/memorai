@@ -84,6 +84,101 @@ window.App = window.App || {};
     return note;
   }
 
+  // Core push — mutates state.notes (updates _sha), pushes images. No UI, no toasts.
+  App._pushCore = async function () {
+    var s = state.settings;
+    App.oneTimeMigration();
+
+    var remoteSHAs = {};
+    var remoteFiles = [];
+    try {
+      var listing = await repoAPI('/notes?ref=' + s.branch, 'GET');
+      if (Array.isArray(listing)) {
+        remoteFiles = listing;
+        listing.forEach(function (rf) {
+          remoteSHAs[rf.name.replace('.md', '')] = rf.sha;
+        });
+      }
+    } catch (e) { /* notes/ may not exist yet on an empty repo */ }
+
+    for (var i = 0; i < state.notes.length; i++) {
+      var note = state.notes[i];
+      var md = App.noteToMD(note);
+      var path = '/notes/' + note.id + '.md';
+      var message = 'Update ' + (note.title || 'Untitled');
+      var sha = remoteSHAs[note.id] || note._sha;
+      var body = { message: message, content: btoaSafe(md), branch: s.branch };
+      if (sha) body.sha = sha;
+      var result = await repoAPI(path, 'PUT', body);
+      if (result && result.content && result.content.sha) {
+        note._sha = result.content.sha;
+      }
+    }
+
+    // Delete remote notes that no longer exist locally — reuse listing from above
+    try {
+      if (remoteFiles.length > 0) {
+        var localIds = new Set(state.notes.map(function (n) { return n.id; }));
+        for (var j = 0; j < remoteFiles.length; j++) {
+          var rf = remoteFiles[j];
+          if (rf.type !== 'file') continue;
+          var remoteId = rf.name.replace('.md', '');
+          if (!localIds.has(remoteId)) {
+            try {
+              await repoAPI('/notes/' + rf.name, 'DELETE', { message: 'Delete ' + remoteId, sha: rf.sha, branch: s.branch });
+            } catch (e) {
+              console.warn('Failed to delete remote note:', rf.name, e);
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Could not check remote deletions:', e);
+    }
+
+    await App.pushAllImages();
+  };
+
+  // Core pull — fetches remote notes, merges into state.notes (newer updatedAt wins).
+  // Returns { changed: true } if any note was added or updated. No UI, no toasts.
+  App._pullCore = async function () {
+    var s = state.settings;
+    var files = await repoAPI('/notes?ref=' + s.branch, 'GET');
+    if (!Array.isArray(files)) return { changed: false };
+
+    var changed = false;
+    var idMap = new Map(state.notes.map(function (n) { return [n.id, n]; }));
+
+    for (var i = 0; i < files.length; i++) {
+      var f = files[i];
+      if (f.type !== 'file') continue;
+      var fileData = await repoAPI('/notes/' + f.name + '?ref=' + s.branch, 'GET');
+      if (!fileData || !fileData.content) continue;
+      var md = atobSafe(fileData.content);
+      var note = App.mdToNote(md);
+      if (!note) continue;
+      note._sha = fileData.sha;
+      var existing = idMap.get(note.id);
+      if (existing) {
+        if (note.updatedAt > existing.updatedAt) {
+          Object.assign(existing, note);
+          idMap.set(note.id, existing);
+          changed = true;
+        }
+      } else {
+        state.notes.push(note);
+        idMap.set(note.id, note);
+        changed = true;
+      }
+    }
+
+    if (changed) {
+      state.notes.sort(function (a, b) { return b.updatedAt - a.updatedAt; });
+    }
+
+    return { changed: changed };
+  };
+
   App.pushAllNotes = async function () {
     var s = state.settings;
     if (!s.githubToken || !s.repo) {
@@ -93,62 +188,11 @@ window.App = window.App || {};
     dom.syncLabel.textContent = 'Pushing...';
     dom.syncBtn.disabled = true;
     try {
-      App.oneTimeMigration();
-
-      // Build remote SHA map upfront — needed to PUT existing files without a stored _sha
-      var remoteSHAs = {};
-      var remoteFiles = [];
-      try {
-        var listing = await repoAPI('/notes?ref=' + s.branch, 'GET');
-        if (Array.isArray(listing)) {
-          remoteFiles = listing;
-          listing.forEach(function (rf) {
-            remoteSHAs[rf.name.replace('.md', '')] = rf.sha;
-          });
-        }
-      } catch (e) { /* notes/ may not exist yet on an empty repo */ }
-
-      for (var i = 0; i < state.notes.length; i++) {
-        var note = state.notes[i];
-        var md = App.noteToMD(note);
-        var path = '/notes/' + note.id + '.md';
-        var message = 'Update ' + (note.title || 'Untitled');
-        var sha = remoteSHAs[note.id] || note._sha;
-        var body = { message: message, content: btoaSafe(md), branch: s.branch };
-        if (sha) body.sha = sha;
-        var result = await repoAPI(path, 'PUT', body);
-        if (result && result.content && result.content.sha) {
-          note._sha = result.content.sha;
-        }
-      }
-
-      // Delete remote notes that no longer exist locally — reuse listing from above
-      try {
-        if (remoteFiles.length > 0) {
-          var localIds = new Set(state.notes.map(function (n) { return n.id; }));
-          for (var j = 0; j < remoteFiles.length; j++) {
-            var rf = remoteFiles[j];
-            if (rf.type !== 'file') continue;
-            var remoteId = rf.name.replace('.md', '');
-            if (!localIds.has(remoteId)) {
-              try {
-                await repoAPI('/notes/' + rf.name, 'DELETE', { message: 'Delete ' + remoteId, sha: rf.sha, branch: s.branch });
-              } catch (e) {
-                console.warn('Failed to delete remote note:', rf.name, e);
-              }
-            }
-          }
-        }
-      } catch (e) {
-        console.warn('Could not check remote deletions:', e);
-      }
-
-      App.pushAllImages().then(function () {
-        App.saveNotes();
-        dom.syncLabel.textContent = 'Sync with Repo';
-        dom.syncBtn.disabled = false;
-        App.toast('Pushed to repo!', 'success');
-      });
+      await App._pushCore();
+      App.saveNotes();
+      dom.syncLabel.textContent = 'Sync with Repo';
+      dom.syncBtn.disabled = false;
+      App.toast('Pushed to repo!', 'success');
     } catch (e) {
       dom.syncLabel.textContent = 'Sync with Repo';
       dom.syncBtn.disabled = false;
@@ -184,33 +228,7 @@ window.App = window.App || {};
     dom.syncLabel.textContent = 'Pulling...';
     dom.syncBtn.disabled = true;
     try {
-      var files = await repoAPI('/notes?ref=' + s.branch, 'GET');
-      if (!Array.isArray(files)) {
-        dom.syncLabel.textContent = 'Sync with Repo';
-        dom.syncBtn.disabled = false;
-        App.toast('No notes found in repo', 'error');
-        return;
-      }
-      var idMap = new Map(state.notes.map(function (n) { return [n.id, n]; }));
-      for (var i = 0; i < files.length; i++) {
-        var f = files[i];
-        if (f.type !== 'file') continue;
-        var fileData = await repoAPI('/notes/' + f.name + '?ref=' + s.branch, 'GET');
-        if (!fileData || !fileData.content) continue;
-        var md = atobSafe(fileData.content);
-        var note = App.mdToNote(md);
-        if (!note) continue;
-        note._sha = fileData.sha;
-        var existing = idMap.get(note.id);
-        if (existing) {
-          if (note.updatedAt > existing.updatedAt) {
-            Object.assign(existing, note);
-          }
-        } else {
-          state.notes.push(note);
-        }
-      }
-      state.notes.sort(function (a, b) { return b.updatedAt - a.updatedAt; });
+      await App._pullCore();
       App.saveNotes();
       App.renderNotesList();
       App.updateNoteCount();
@@ -227,13 +245,40 @@ window.App = window.App || {};
     }
   };
 
-  App.handleSync = function () {
+  App.handleSync = async function () {
     var s = state.settings;
     App.saveSettings();
-    if (s.repo && state.notes.length === 0) {
-      App.pullAllNotes();
-    } else {
-      App.pushAllNotes();
+    if (!s.githubToken || !s.repo) {
+      App.toast('Set GitHub token and repository in Settings', 'error');
+      return;
+    }
+    dom.syncLabel.textContent = 'Syncing...';
+    dom.syncBtn.disabled = true;
+    try {
+      await App._pullCore();
+      await App._pushCore();
+      App.saveNotes();
+      App.renderNotesList();
+      App.updateNoteCount();
+      if (state.activeNoteId && !state.notes.find(function (n) { return n.id === state.activeNoteId; })) {
+        App.showEmptyEditor();
+      }
+      dom.syncLabel.textContent = 'Sync with Repo';
+      dom.syncBtn.disabled = false;
+      App.toast('Synced with repo!', 'success');
+    } catch (e) {
+      dom.syncLabel.textContent = 'Sync with Repo';
+      dom.syncBtn.disabled = false;
+      App.toast('Sync failed: ' + e.message, 'error');
+    }
+  };
+
+  App.silentPull = async function () {
+    try {
+      return await App._pullCore();
+    } catch (e) {
+      console.warn('Silent pull failed:', e);
+      return { changed: false };
     }
   };
 
